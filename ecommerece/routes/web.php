@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +33,30 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/admin/dashboard', function () {
-        return view('dashboard');
+        return view('Admin.admin_index');
     })->name('dashboard');
 });
+
+//Admin routes;
+Route::get('admin/logout',[AdminController::class,'destroy'])->name('admin.logout');
+
+//Admin Profile
+Route::get('admin/profile',[AdminProfileController::class,'AdminProfile'])->name('admin.profile');
+
+Route::get('admin/editprofile',[AdminProfileController::class,'AdminEditProfile'])->name('admin.editprofile');
+
+Route::post('admin/changesprofile',[AdminProfileController::class,'AdminChangesProfile'])->name('admin.changesprofile');
+
+Route::get('admin/password',[AdminProfileController::class,'AdminPassword'])->name('admin.password');
+
+Route::post('admin/changespassword',[AdminProfileController::class,'AdminChangesPassword'])->name('admin.changespassword');
+
+
+
+
+
+
+
 
 
 //for user guard
