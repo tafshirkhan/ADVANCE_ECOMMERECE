@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Frontend\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,9 @@ use App\Http\Controllers\Backend\AdminProfileController;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 
 Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){
@@ -57,7 +58,7 @@ Route::post('admin/changespassword',[AdminProfileController::class,'AdminChanges
 
 
 
-
+//User
 
 //for user guard
 Route::middleware([
@@ -69,6 +70,47 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+//HOME ROUTE
+Route::get('/',[IndexController::class,'ViewIndexPage']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //admin guard
 /*Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
