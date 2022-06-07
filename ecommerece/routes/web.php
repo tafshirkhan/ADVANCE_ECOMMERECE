@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
@@ -67,12 +70,25 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+         $data = Auth::user()->id;
+         $user = User::find($data);
+        return view('dashboard',compact('user'));
     })->name('dashboard');
 });
 
 //HOME ROUTE
 Route::get('/',[IndexController::class,'ViewIndexPage']);
+
+//USER logout
+Route::get('user/logout',[IndexController::class,'UserLogout'])->name('user.logout');
+
+Route::get('user/profile',[IndexController::class,'UserProfile'])->name('user.profile');
+
+Route::post('user/updateprofile',[IndexController::class,'UserUpdateProfile'])->name('user.updateprofile');
+
+Route::get('user/password',[IndexController::class,'UserPassword'])->name('user.password');
+
+Route::post('user/updatepassword',[IndexController::class,'UserUpdatePassword'])->name('user.updatepassword');
 
 
 
