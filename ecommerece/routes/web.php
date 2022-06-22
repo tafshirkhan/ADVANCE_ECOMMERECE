@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Backend\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +92,22 @@ Route::get('user/password',[IndexController::class,'UserPassword'])->name('user.
 Route::post('user/updatepassword',[IndexController::class,'UserUpdatePassword'])->name('user.updatepassword');
 
 
+//BRANDS
+Route::prefix('brand')->group(function(){
+Route::get('/viewallbrands',[BrandController::class,'ViewAllBrands'])->name('all.brands');
 
+Route::get('/addnewbrands',[BrandController::class,'AddBrands'])->name('add.newbrands');
+
+Route::post('/brandstore',[BrandController::class,'StoreBrand'])->name('brand.store');
+
+Route::get('/brandedit/{id}',[BrandController::class,'EditBrand'])->name('brand.edit');
+
+//Route::post('/brandupdate/{id}',[BrandController::class,'BrandUpdate'])->name('brand.update');
+//OR
+Route::post('/brandupdate',[BrandController::class,'BrandUpdate'])->name('brand.update');
+
+Route::get('/branddelete/{id}',[BrandController::class,'BrandDelete'])->name('brand.delete');
+});
 
 
 

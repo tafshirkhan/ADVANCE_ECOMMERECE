@@ -1,3 +1,16 @@
+@php
+//Into the prefix area whatever route we create will affect
+$prefix = Request::route()->getPrefix();
+//Current route we will get
+$route = Route::current()->getName();
+// dd($prefix);
+//dd($route);
+@endphp
+
+
+
+
+
 <aside class="main-sidebar">
     <!-- sidebar-->
     <section class="sidebar">
@@ -17,24 +30,28 @@
         <!-- sidebar menu-->
         <ul class="sidebar-menu" data-widget="tree">
 
-            <li>
-                <a href="index.html">
+            <li class="{{ $route == 'dashboard' ? 'active' : '' }}">
+                <a href="
+                {{ url('admin/dashboard') }}">
                     <i data-feather="pie-chart"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ $prefix == '/brand' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="message-circle"></i>
-                    <span>Application</span>
+                    <i data-feather="file"></i>
+                    <span>Brands</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="chat.html"><i class="ti-more"></i>Chat</a></li>
-                    <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li>
+                    <li class="{{ $route == 'all.brands' ? 'active' : '' }}"><a href="{{ route('all.brands') }}"><i
+                                class="ti-more"></i>All Brands</a></li>
+                    <li class="{{ $route == 'add.newbrands' ? 'active' : '' }}"><a
+                            href="{{ route('add.newbrands') }}"><i class="ti-more"></i>Add Brands</a></li>
+
                 </ul>
             </li>
 

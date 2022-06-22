@@ -13,7 +13,7 @@
                     <ul class="list-group list-group-flush">
                         <a href="{{ route('dashboard') }}" class="btn btn-primary btn-sm btn-block">Home</a>
                         <a href="{{ route('user.profile') }}" class="btn btn-info btn-sm btn-block">Profile</a>
-                        <a href="" class="btn btn-success btn-sm btn-block">Changes Password</a>
+                        <a href="{{ route('user.password') }}" class="btn btn-success btn-sm btn-block">Changes Password</a>
                         <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
 
 
