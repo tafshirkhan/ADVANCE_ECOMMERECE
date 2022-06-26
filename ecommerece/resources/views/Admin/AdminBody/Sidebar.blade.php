@@ -55,6 +55,30 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Category</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'all.category' ? 'active' : '' }}"><a
+                            href="{{ route('all.category') }}"><i class="ti-more"></i>All Category</a></li>
+                    <li class="{{ $route == 'add.newcategory' ? 'active' : '' }}"><a
+                            href="{{ route('add.newcategory') }}"><i class="ti-more"></i>Add Category</a></li>
+
+                    <li class="{{ $route == 'all.subcategory' ? 'active' : '' }}"><a
+                            href="{{ route('all.subcategory') }}"><i class="ti-more"></i>All Sub Category</a></li>
+                    <li class="{{ $route == 'add.subcategory' ? 'active' : '' }}"><a
+                            href="{{ route('add.subcategory') }}"><i class="ti-more"></i>Add Sub Category</a></li>
+
+                </ul>
+            </li>
+
+
+
             <li class="treeview">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Mailbox</span>
