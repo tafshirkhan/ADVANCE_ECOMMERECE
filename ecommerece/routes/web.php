@@ -144,6 +144,23 @@ Route::post('/subcategoryupdate',[SubCategoryController::class,'SubCategoryUpdat
 
 Route::get('/subcategorydelete/{id}',[SubCategoryController::class,'SubCategoryDelete'])->name('subcategory.delete');
 
+//SUB SUBCATEGORY
+Route::get('/sub/viewall/sub_category',[SubCategoryController::class,'ViewAllSub_Category'])->name('all.sub_category');
+
+Route::get('/addnew/sub/subcategory',[SubCategoryController::class,'AddSub_SubCategory'])->name('add.sub_category');
+
+//this route is for ajax which is from add sub_subcategory file
+Route::get('/subcategory/ajax/{category_id}',[SubCategoryController::class,'GetSubCategory']);
+
+Route::post('/sub/subcategorystore',[SubCategoryController::class,'Sub_SubCategoryStore'])->name('sub_subcategory.store');
+
+Route::get('/sub/subcategoryedit/{id}',[SubCategoryController::class,'EditSub_SubCategory'])->name('sub_subcategory.edit');
+
+Route::post('/sub/subcategoryupdate',[SubCategoryController::class,'Sub_SubCategoryUpdate'])->name('sub_subcategory.update');
+
+Route::get('/sub/subcategorydelete/{id}',[SubCategoryController::class,'Sub_SubCategoryDelete'])->name('sub_subcategory.delete');
+
+//
 });
 
 
