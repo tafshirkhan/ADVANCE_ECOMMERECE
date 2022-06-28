@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\ProductController;
 
 
 /*
@@ -161,6 +162,12 @@ Route::post('/sub/subcategoryupdate',[SubCategoryController::class,'Sub_SubCateg
 Route::get('/sub/subcategorydelete/{id}',[SubCategoryController::class,'Sub_SubCategoryDelete'])->name('sub_subcategory.delete');
 
 //
+});
+
+//add.product
+Route::prefix('product')->group(function(){
+ Route::get('/allproduct',[ProductController::class,'AllProducts'])->name('all.products');
+ Route::get('/addproduct',[ProductController::class,'AddProducts'])->name('add.product');
 });
 
 
