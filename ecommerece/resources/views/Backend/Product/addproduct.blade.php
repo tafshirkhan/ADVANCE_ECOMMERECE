@@ -1,5 +1,7 @@
 @extends('Admin.admin_master')
 @section('admin')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <div class="container-full">
         <!-- Content Header (Page header) -->
 
@@ -17,7 +19,8 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form novalidate>
+                            <form method="post" action="{{ route('store.product') }}" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row">
@@ -229,10 +232,13 @@
                                                 <div class="form-group">
                                                     <h5>Product Main Thumb <span class="text-danger"></span></h5>
                                                     <div class="controls">
-                                                        <input type="file" name="product_thumb" class="form-control">
+                                                        <input type="file" name="product_thumb" class="form-control"
+                                                            onchange="mainThumbUrl(this)">
                                                         @error('product_thumb')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
+
+                                                        <img src="" id="mainThumb">
                                                     </div>
                                                 </div>
                                             </div><!-- 1st col md 4 -->
@@ -242,10 +248,13 @@
                                                 <div class="form-group">
                                                     <h5>Product Image<span class="text-danger"></span></h5>
                                                     <div class="controls">
-                                                        <input type="file" name="multi_img[]" class="form-control">
+                                                        <input type="file" name="multi_img[]" class="form-control"
+                                                            multiple="" id="multiImg">
                                                         @error('multi_img')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
+
+                                                        <div class="row" id="preview_img"></div>
                                                     </div>
                                                 </div>
                                             </div><!-- 2nd col md 4 -->
@@ -336,4 +345,100 @@
         </section>
         <!-- /.content -->
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select[name="category_id"]').on('change', function() {
+                var category_id = $(this).val();
+                if (category_id) {
+                    $.ajax({
+                        url: "{{ url('/category/subcategory/ajax') }}/" + category_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="sub_subcategory_id"]').html('');
+                            var d = $('select[name="subcategory_id"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="subcategory_id"]').append(
+                                    '<option value="' + value.id + '">' + value
+                                    .subcategory_name + '</option>');
+                            });
+                        },
+                    });
+                } else {
+                    alert('danger');
+                }
+            }); /* Category & SubCategort end */
+
+
+
+
+
+
+
+
+            $('select[name="subcategory_id"]').on('change', function() {
+                var subcategory_id = $(this).val();
+                if (subcategory_id) {
+                    $.ajax({
+                        url: "{{ url('/category/sub_subcategory/ajax') }}/" + subcategory_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            var d = $('select[name="sub_subcategory_id"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="sub_subcategory_id"]').append(
+                                    '<option value="' + value.id + '">' + value
+                                    .sub_subcategory_name + '</option>');
+                            });
+                        },
+                    });
+                } else {
+                    alert('danger');
+                }
+            }); /* SubCategory & Sub_SubCategort end */
+        });
+    </script>
+    <script type="text/javascript">
+        /* This script for showing the thumb image while choosing */
+        function mainThumbUrl(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#mainThumb').attr('src', e.target.result).width(50).height(50);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        /* This script for showing multiple image */
+        $(document).ready(function() {
+            $('#multiImg').on('change', function() { //on file input chnages
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    var data = $(this)[0].files //this file data
+
+                    $.each(data, function(index, file) { //loop through each file
+                        if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) { //check supported file
+                            var fRead = new FileReader(); //new file reader
+                            fRead.onload = (function(file) { //trigger function on successful read
+                                return function(e) {
+                                    var img = $('<img/>').addClass('thumb').attr('src',
+                                        e.target.result).width(50).height(50);
+                                    $('#preview_img').append(
+                                        img) //append image to output element
+
+                                };
+
+                            })(file);
+                            fRead.readAsDataURL(file); //URL representing the file's data
+                        }
+                    });
+                } else {
+                    alert("Your browser dosen't support file API!")
+                }
+            });
+        });
+    </script>
 @endsection

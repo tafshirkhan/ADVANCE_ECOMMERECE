@@ -153,6 +153,11 @@ Route::get('/addnew/sub/subcategory',[SubCategoryController::class,'AddSub_SubCa
 //this route is for ajax which is from add sub_subcategory file
 Route::get('/subcategory/ajax/{category_id}',[SubCategoryController::class,'GetSubCategory']);
 
+//this route is for ajax which is from add product file for getting the sub_subcategory field automatically
+
+Route::get('/sub_subcategory/ajax/{subcategory_id}',[SubCategoryController::class,'GetSub_SubCategory']);
+
+
 Route::post('/sub/subcategorystore',[SubCategoryController::class,'Sub_SubCategoryStore'])->name('sub_subcategory.store');
 
 Route::get('/sub/subcategoryedit/{id}',[SubCategoryController::class,'EditSub_SubCategory'])->name('sub_subcategory.edit');
@@ -164,10 +169,17 @@ Route::get('/sub/subcategorydelete/{id}',[SubCategoryController::class,'Sub_SubC
 //
 });
 
-//add.product
+//PRODUCT
 Route::prefix('product')->group(function(){
  Route::get('/allproduct',[ProductController::class,'AllProducts'])->name('all.products');
+
  Route::get('/addproduct',[ProductController::class,'AddProducts'])->name('add.product');
+
+ Route::post('/storeproduct',[ProductController::class,'StoreProduct'])->name('store.product');
+
+Route::get('/manageproduct',[ProductController::class,'ManageProducts'])->name('manage.product');
+
+ //
 });
 
 
