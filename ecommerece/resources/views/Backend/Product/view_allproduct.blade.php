@@ -41,7 +41,10 @@
                                             <td>{{ $product->product_code }}</td>
                                             <td>{{ $product->selling_price }}</td>
                                             <td>
-                                                <a href="" class="btn btn-info">Edit</a>
+                                                <a href="" class="btn btn-success">View</a>
+
+                                                <a href="{{ route('product.edit', $product->id) }}"
+                                                    class="btn btn-info">Edit</a>
                                                 <a href="" class="btn btn-danger" id="delete">Delete</a>
 
 

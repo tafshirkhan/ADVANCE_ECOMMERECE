@@ -177,7 +177,17 @@ Route::prefix('product')->group(function(){
 
  Route::post('/storeproduct',[ProductController::class,'StoreProduct'])->name('store.product');
 
-Route::get('/manageproduct',[ProductController::class,'ManageProducts'])->name('manage.product');
+ Route::get('/manageproduct',[ProductController::class,'ManageProducts'])->name('manage.product');
+
+ Route::get('/editproduct/{id}',[ProductController::class,'EditProducts'])->name('product.edit');
+
+ Route::post('/updateproduct',[ProductController::class, 'UpdateProduct'])->name('update.product');
+
+ Route::post('/update/multiimage',[ProductController::class, 'UpdateProductMultiImage'])->name('productupdate.multiimage');
+
+ Route::post('/update/thumbimage',[ProductController::class, 'UpdateProductThumbImage'])->name('productupdate.thumb');
+
+ Route::get('/deleteproduct/multiimage/{id}',[ProductController::class,'DeleteProductMultiImage'])->name('deleteproduct.multiimage');
 
  //
 });
