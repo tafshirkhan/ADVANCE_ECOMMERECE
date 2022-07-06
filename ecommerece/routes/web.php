@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SliderController;
 
 
 /*
@@ -176,6 +177,38 @@ Route::prefix('product')->group(function(){
  Route::get('/addproduct',[ProductController::class,'AddProducts'])->name('add.product');
 
  Route::post('/storeproduct',[ProductController::class,'StoreProduct'])->name('store.product');
+
+ Route::get('/manageproduct',[ProductController::class,'ManageProducts'])->name('manage.product');
+
+ Route::get('/editproduct/{id}',[ProductController::class,'EditProducts'])->name('product.edit');
+
+ Route::post('/updateproduct',[ProductController::class, 'UpdateProduct'])->name('update.product');
+
+ Route::post('/update/multiimage',[ProductController::class, 'UpdateProductMultiImage'])->name('productupdate.multiimage');
+
+ Route::post('/update/thumbimage',[ProductController::class, 'UpdateProductThumbImage'])->name('productupdate.thumb');
+
+ Route::get('/deleteproduct/multiimage/{id}',[ProductController::class,'DeleteProductMultiImage'])->name('deleteproduct.multiimage');
+
+ Route::get('/inactive/{id}',[ProductController::class,'ProductInactive'])->name('product.inactive');
+
+ Route::get('/active/{id}',[ProductController::class,'ProductActive'])->name('product.active');
+
+ Route::get('/delete/{id}',[ProductController::class,'DeleteProducts'])->name('product.delete');
+
+ //all.sliders
+});
+
+
+
+//SLIDERS
+Route::prefix('slider')->group(function(){
+
+ Route::get('/allsliders',[SliderController::class,'AllSliders'])->name('all.sliders');
+
+ Route::get('/addslider',[SliderController::class,'AddSlider'])->name('add.slider');
+
+ Route::post('/storeslider',[SliderController::class,'StoreSlider'])->name('slider.store');
 
  Route::get('/manageproduct',[ProductController::class,'ManageProducts'])->name('manage.product');
 
