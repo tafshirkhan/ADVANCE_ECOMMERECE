@@ -36,6 +36,8 @@ Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){
 
 });
 
+Route::middleware(['auth:admin'])->group(function(){
+
 //for admin guard
 Route::middleware([
     'auth:sanctum,admin',
@@ -44,7 +46,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('Admin.admin_index');
-    })->name('dashboard');
+    })->name('dashboard')->middleware('auth:admin');
 });
 
 //Admin routes;
@@ -61,7 +63,7 @@ Route::get('admin/password',[AdminProfileController::class,'AdminPassword'])->na
 
 Route::post('admin/changespassword',[AdminProfileController::class,'AdminChangesPassword'])->name('admin.changespassword');
 
-
+});
 
 
 
@@ -210,21 +212,15 @@ Route::prefix('slider')->group(function(){
 
  Route::post('/storeslider',[SliderController::class,'StoreSlider'])->name('slider.store');
 
- Route::get('/manageproduct',[ProductController::class,'ManageProducts'])->name('manage.product');
+ Route::get('/editslider/{id}',[SliderController::class,'EditSlider'])->name('slider.edit');
 
- Route::get('/editproduct/{id}',[ProductController::class,'EditProducts'])->name('product.edit');
+ Route::post('/updateslider',[SliderController::class, 'UpdateSlider'])->name('slider.update');
 
- Route::post('/updateproduct',[ProductController::class, 'UpdateProduct'])->name('update.product');
+ Route::get('/deleteslider/{id}',[SliderController::class,'DeleteSlider'])->name('slider.delete');
 
- Route::post('/update/multiimage',[ProductController::class, 'UpdateProductMultiImage'])->name('productupdate.multiimage');
+ Route::get('/inactive/{id}',[SliderController::class,'SliderInactive'])->name('slider.inactive');
 
- Route::post('/update/thumbimage',[ProductController::class, 'UpdateProductThumbImage'])->name('productupdate.thumb');
-
- Route::get('/deleteproduct/multiimage/{id}',[ProductController::class,'DeleteProductMultiImage'])->name('deleteproduct.multiimage');
-
- Route::get('/inactive/{id}',[ProductController::class,'ProductInactive'])->name('product.inactive');
-
- Route::get('/active/{id}',[ProductController::class,'ProductActive'])->name('product.active');
+ Route::get('/active/{id}',[SliderController::class,'SliderActive'])->name('slider.active');
 
  Route::get('/delete/{id}',[ProductController::class,'DeleteProducts'])->name('product.delete');
 

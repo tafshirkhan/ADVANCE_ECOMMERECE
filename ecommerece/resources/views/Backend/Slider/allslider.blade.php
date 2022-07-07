@@ -54,14 +54,18 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-info">Edit</a>
-                                                <a href="" class="btn btn-danger" id="delete">Delete</a>
+                                                <a href="{{ route('slider.edit', $slider->id) }}"
+                                                    class="btn btn-info">Edit</a>
+                                                <a href="{{ route('slider.delete', $slider->id) }}" class="btn btn-danger"
+                                                    id="delete">Delete</a>
 
                                                 @if ($slider->status == 1)
-                                                    <a href="" class="btn btn-danger" title="Inactive"><i
+                                                    <a href="{{ route('slider.inactive', $slider->id) }}"
+                                                        class="btn btn-danger" title="Inactive"><i
                                                             class="fa fa-arrow-down"></i></a>
                                                 @else
-                                                    <a href="" class="btn btn-info" title="Active"><i
+                                                    <a href="{{ route('slider.active', $slider->id) }}"
+                                                        class="btn btn-primary" title="Active"><i
                                                             class="fa fa-arrow-up"></i></a>
                                                 @endif
 
