@@ -116,8 +116,7 @@ $route = Route::current()->getName();
                             href="{{ route('all.sliders') }}"><i class="ti-more"></i>All Sliders</a></li>
                     <li class="{{ $route == 'add.slider' ? 'active' : '' }}"><a
                             href="{{ route('add.slider') }}"><i class="ti-more"></i>Add Slider</a></li>
-                    <li class="{{ $route == 'manage.product' ? 'active' : '' }}"><a
-                            href="{{ route('manage.product') }}"><i class="ti-more"></i>Manage Products</a></li>
+
 
                 </ul>
             </li>

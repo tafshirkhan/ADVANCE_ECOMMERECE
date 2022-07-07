@@ -6,12 +6,14 @@ use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
     public function ViewIndexPage(){
-        return view('Frontend.index');
+         $category = Category::orderBy('category_name', 'ASC')->get();
+        return view('Frontend.index',compact('category'));
     }
 
     public function UserLogout(){
