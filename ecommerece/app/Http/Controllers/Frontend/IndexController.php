@@ -7,13 +7,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Slider;
+use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
     public function ViewIndexPage(){
-         $category = Category::orderBy('category_name', 'ASC')->get();
-        return view('Frontend.index',compact('category'));
+        $slider = Slider::where('status',1)->orderBy('id','DESC')->limit(4)->get();
+        $category = Category::orderBy('category_name', 'ASC')->get();
+        $product = Product::where('status',1)->orderBy('id','DESC')->get();
+
+        return view('Frontend.index',compact('category','slider','product'));
     }
 
     public function UserLogout(){
