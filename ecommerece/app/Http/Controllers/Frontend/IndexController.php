@@ -19,7 +19,19 @@ class IndexController extends Controller
         $category = Category::orderBy('category_name', 'ASC')->get();
         $product = Product::where('status',1)->orderBy('id','DESC')->get();
 
-        return view('Frontend.index',compact('category','slider','product'));
+        $featured = Product::where('featured',1)->orderBy('id','DESC')->limit(5)->get();
+        $hotdeals = Product::where('hot_deals',1)->orderBy('id','DESC')->limit(2)->get();
+        $specialoffer = Product::where('special_offer',1)->orderBy('id','DESC')->limit(3)->get();
+        $specialdeals = Product::where('special_deals',1)->orderBy('id','DESC')->limit(3)->get();
+        
+        $skipcategory = Category::skip(0)->first();
+        $skipproduct = Product::where('status',1)->where('category_id',$skipcategory->id)->orderBy('id','DESC')->get();
+        //return $skipcategory->id;
+        //die();
+
+
+
+        return view('Frontend.index',compact('category','slider','product','featured','hotdeals','specialoffer','specialdeals','skipcategory','skipproduct'));
     }
 
     public function UserLogout(){
