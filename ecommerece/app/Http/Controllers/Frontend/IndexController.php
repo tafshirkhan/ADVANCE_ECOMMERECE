@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\MultiImage;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
@@ -20,7 +21,7 @@ class IndexController extends Controller
         $product = Product::where('status',1)->orderBy('id','DESC')->get();
 
         $featured = Product::where('featured',1)->orderBy('id','DESC')->limit(5)->get();
-        $hotdeals = Product::where('hot_deals',1)->orderBy('id','DESC')->limit(2)->get();
+        $hotdeals = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(2)->get();
         $specialoffer = Product::where('special_offer',1)->orderBy('id','DESC')->limit(3)->get();
         $specialdeals = Product::where('special_deals',1)->orderBy('id','DESC')->limit(3)->get();
         
@@ -29,9 +30,15 @@ class IndexController extends Controller
         //return $skipcategory->id;
         //die();
 
+        $skipcategory_1 = Category::skip(1)->first();
+        $skipproduct_1 = Product::where('status',1)->where('category_id',$skipcategory_1->id)->orderBy('id','DESC')->get();
+
+        $skipbrand_1 = Brand::skip(3)->first();
+        $skip_brandproduct_1 = Product::where('status',1)->where('category_id',$skipbrand_1->id)->orderBy('id','DESC')->get();
 
 
-        return view('Frontend.index',compact('category','slider','product','featured','hotdeals','specialoffer','specialdeals','skipcategory','skipproduct'));
+
+        return view('Frontend.index',compact('category','slider','product','featured','hotdeals','specialoffer','specialdeals','skipcategory','skipproduct','skipcategory_1','skipproduct_1','skipbrand_1','skip_brandproduct_1'));
     }
 
     public function UserLogout(){
@@ -107,5 +114,11 @@ class IndexController extends Controller
         $product = Product::findOrFail($id);
         $multiImg = MultiImage::where('product_id',$id)->get();
         return view('Frontend.Product.product_details',compact('product','multiImg'));
+    }
+
+    public function ProductTagWise($tags){
+        $producttag = Product::where('status',1)->where('product_tag',$tags)->orderBy('id','DESC')->get();
+
+        return view('Frontend.Tags.product_tagview',compact('producttag'));
     }
 }

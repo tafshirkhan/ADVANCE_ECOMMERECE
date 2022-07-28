@@ -10,67 +10,7 @@
             <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
 
                 <!-- ================================== TOP NAVIGATION ================================== -->
-                <div class="side-menu animate-dropdown outer-bottom-xs">
-                    <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
-                    <nav class="yamm megamenu-horizontal">
-                        <ul class="nav">
-
-                            @foreach ($category as $category)
-                                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle"
-                                        data-toggle="dropdown"><i class="icon {{ $category->category_icon }}"
-                                            aria-hidden="true"></i>{{ $category->category_name }}</a>
-                                    <ul class="dropdown-menu mega-menu">
-                                        <li class="yamm-content">
-                                            <div class="row">
-                                                <!--Getting subcategory data -->
-                                                @php
-                                                    $subcategory = App\Models\SubCategory::where('category_id', $category->id)
-                                                        ->orderBy('subcategory_name', 'ASC')
-                                                        ->get();
-                                                @endphp
-
-                                                @foreach ($subcategory as $subcategory)
-                                                    <div class="col-sm-12 col-md-3">
-                                                        <h2 class="title">
-                                                            {{ $subcategory->subcategory_name }}
-                                                        </h2>
-
-                                                        <!--Getting sub subcategory data -->
-                                                        @php
-                                                            $sub_subcategory = App\Models\Sub_SubCategory::where('subcategory_id', $subcategory->id)
-                                                                ->orderBy('sub_subcategory_name', 'ASC')
-                                                                ->get();
-                                                        @endphp
-
-                                                        @foreach ($sub_subcategory as $sub_subcategory)
-                                                            <ul class="links list-unstyled">
-                                                                <li><a
-                                                                        href="#">{{ $sub_subcategory->sub_subcategory_name }}</a>
-                                                                </li>
-
-                                                            </ul>
-                                                        @endforeach
-                                                    </div>
-                                                    <!-- /.col -->
-                                                @endforeach
-
-
-
-                                            </div>
-                                            <!-- /.row -->
-                                        </li>
-                                        <!-- /.yamm-content -->
-                                    </ul>
-                                    <!-- /.dropdown-menu -->
-                                </li>
-                                <!-- /.menu-item -->
-                            @endforeach
-
-                        </ul>
-                        <!-- /.nav -->
-                    </nav>
-                    <!-- /.megamenu-horizontal -->
-                </div>
+                @include('Frontend.Common.vertical_side_menu')
                 <!-- /.side-menu -->
                 <!-- ================================== TOP NAVIGATION : END ================================== -->
 
@@ -242,33 +182,18 @@
                 </div>
                 <!-- /.sidebar-widget -->
                 <!-- ============================================== SPECIAL OFFER : END ============================================== -->
+
                 <!-- ============================================== PRODUCT TAGS ============================================== -->
-                <div class="sidebar-widget product-tag wow fadeInUp">
-                    <h3 class="section-title">Product tags</h3>
-                    <div class="sidebar-widget-body outer-top-xs">
-                        <div class="tag-list"> <a class="item" title="Phone" href="category.html">Phone</a> <a
-                                class="item active" title="Vest" href="category.html">Vest</a> <a class="item"
-                                title="Smartphone" href="category.html">Smartphone</a> <a class="item"
-                                title="Furniture" href="category.html">Furniture</a> <a class="item"
-                                title="T-shirt" href="category.html">T-shirt</a> <a class="item"
-                                title="Sweatpants" href="category.html">Sweatpants</a> <a class="item"
-                                title="Sneaker" href="category.html">Sneaker</a> <a class="item" title="Toys"
-                                href="category.html">Toys</a> <a class="item" title="Rose"
-                                href="category.html">Rose</a>
-                        </div>
-                        <!-- /.tag-list -->
-                    </div>
-                    <!-- /.sidebar-widget-body -->
-                </div>
-                <!-- /.sidebar-widget -->
+
                 <!-- ============================================== PRODUCT TAGS : END ============================================== -->
+                @include('Frontend.Common.product_tags')
+
                 <!-- ============================================== SPECIAL DEALS ============================================== -->
 
                 <div class="sidebar-widget outer-bottom-small wow fadeInUp">
                     <h3 class="section-title">Special Deals</h3>
                     <div class="sidebar-widget-body outer-top-xs">
-                        <div
-                            class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
+                        <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
 
                             <div class="item">
                                 <div class="products special-product">
@@ -922,6 +847,91 @@
                 <!-- ============================================== SKIP PRODUCTS : ENDS ============================================== -->
 
 
+                <!-- ============================================== SKIP PRODUCTS_1 : START ============================================== -->
+
+
+                <section class="section featured-product wow fadeInUp">
+                    <h3 class="section-title">{{ $skipcategory_1->category_name }}</h3>
+                    <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+
+                        @foreach ($skipproduct_1 as $skipproduct_1)
+                            <div class="item item-carousel">
+                                <div class="products">
+                                    <div class="product">
+                                        <div class="product-image">
+                                            <div class="image"> <a
+                                                    href="{{ url('product/details_info/' . $skipproduct_1->id . '/' . $skipproduct_1->product_slug) }}"><img
+                                                        src="{{ asset($skipproduct_1->product_thumb) }}"
+                                                        alt=""></a>
+                                            </div>
+                                            <!-- /.image -->
+
+                                            <div class="tag hot"><span>hot</span></div>
+                                        </div>
+                                        <!-- /.product-image -->
+
+                                        <div class="product-info text-left">
+                                            <h3 class="name"><a
+                                                    href="{{ url('product/details_info/' . $skipproduct_1->id . '/' . $skipproduct_1->product_slug) }}">{{ $skipproduct_1->product_name }}</a>
+                                            </h3>
+                                            <div class="rating rateit-small"></div>
+                                            <div class="description"></div>
+
+
+                                            @if ($skipproduct_1->discount_price == null)
+                                                <div class="product-price"> <span class="price">
+                                                        {{ $skipproduct_1->selling_price }}</span> </div>
+                                            @else
+                                                <div class="product-price"> <span class="price">
+                                                        {{ $skipproduct_1->selling_price }}</span><span
+                                                        class="price-before-discount">{{ $skipproduct_1->discount_price }}</span>
+                                                </div>
+                                            @endif
+                                            <!-- /.product-price -->
+
+                                        </div>
+                                        <!-- /.product-info -->
+                                        <div class="cart clearfix animate-effect">
+                                            <div class="action">
+                                                <ul class="list-unstyled">
+                                                    <li class="add-cart-button btn-group">
+                                                        <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                            type="button"> <i class="fa fa-shopping-cart"></i>
+                                                        </button>
+                                                        <button class="btn btn-primary cart-btn" type="button">Add to
+                                                            cart</button>
+                                                    </li>
+                                                    <li class="lnk wishlist"> <a class="add-to-cart"
+                                                            href="detail.html" title="Wishlist"> <i
+                                                                class="icon fa fa-heart"></i> </a> </li>
+                                                    <li class="lnk"> <a class="add-to-cart" href="detail.html"
+                                                            title="Compare"> <i class="fa fa-signal"
+                                                                aria-hidden="true"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- /.action -->
+                                        </div>
+                                        <!-- /.cart -->
+                                    </div>
+                                    <!-- /.product -->
+
+                                </div>
+                                <!-- /.products -->
+                            </div>
+                            <!-- /.item -->
+                        @endforeach
+
+
+                    </div>
+                    <!-- /.home-owl-carousel -->
+                </section>
+
+                <!-- ============================================== SKIP PRODUCTS_1 : ENDS ============================================== -->
+
+
+
 
 
 
@@ -957,6 +967,90 @@
                 </div>
                 <!-- /.wide-banners -->
                 <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
+
+
+                <!-- ============================================== SKIP BRAND: START ============================================== -->
+
+                <section class="section featured-product wow fadeInUp">
+                    <h3 class="section-title">{{ $skipbrand_1->brand_name }}</h3>
+                    <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+
+                        @foreach ($skip_brandproduct_1 as $skip_brandproduct_1)
+                            <div class="item item-carousel">
+                                <div class="products">
+                                    <div class="product">
+                                        <div class="product-image">
+                                            <div class="image"> <a
+                                                    href="{{ url('product/details_info/' . $skip_brandproduct_1->id . '/' . $skip_brandproduct_1->product_slug) }}"><img
+                                                        src="{{ asset($skip_brandproduct_1->product_thumb) }}"
+                                                        alt=""></a>
+                                            </div>
+                                            <!-- /.image -->
+
+                                            <div class="tag hot"><span>hot</span></div>
+                                        </div>
+                                        <!-- /.product-image -->
+
+                                        <div class="product-info text-left">
+                                            <h3 class="name"><a
+                                                    href="{{ url('product/details_info/' . $skip_brandproduct_1->id . '/' . $skip_brandproduct_1->product_slug) }}">{{ $skip_brandproduct_1->product_name }}</a>
+                                            </h3>
+                                            <div class="rating rateit-small"></div>
+                                            <div class="description"></div>
+
+
+                                            @if ($skip_brandproduct_1->discount_price == null)
+                                                <div class="product-price"> <span class="price">
+                                                        {{ $skip_brandproduct_1->selling_price }}</span> </div>
+                                            @else
+                                                <div class="product-price"> <span class="price">
+                                                        {{ $skip_brandproduct_1->selling_price }}</span><span
+                                                        class="price-before-discount">{{ $skip_brandproduct_1->discount_price }}</span>
+                                                </div>
+                                            @endif
+                                            <!-- /.product-price -->
+
+                                        </div>
+                                        <!-- /.product-info -->
+                                        <div class="cart clearfix animate-effect">
+                                            <div class="action">
+                                                <ul class="list-unstyled">
+                                                    <li class="add-cart-button btn-group">
+                                                        <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                            type="button"> <i class="fa fa-shopping-cart"></i>
+                                                        </button>
+                                                        <button class="btn btn-primary cart-btn" type="button">Add to
+                                                            cart</button>
+                                                    </li>
+                                                    <li class="lnk wishlist"> <a class="add-to-cart"
+                                                            href="detail.html" title="Wishlist"> <i
+                                                                class="icon fa fa-heart"></i> </a> </li>
+                                                    <li class="lnk"> <a class="add-to-cart" href="detail.html"
+                                                            title="Compare"> <i class="fa fa-signal"
+                                                                aria-hidden="true"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- /.action -->
+                                        </div>
+                                        <!-- /.cart -->
+                                    </div>
+                                    <!-- /.product -->
+
+                                </div>
+                                <!-- /.products -->
+                            </div>
+                            <!-- /.item -->
+                        @endforeach
+
+
+                    </div>
+                    <!-- /.home-owl-carousel -->
+                </section>
+
+                <!-- ============================================== SKIP BRAND: END ============================================== -->
+
                 <!-- ============================================== BEST SELLER ============================================== -->
 
                 <div class="best-deal wow fadeInUp outer-bottom-xs">

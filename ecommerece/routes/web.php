@@ -230,6 +230,8 @@ Route::prefix('slider')->group(function(){
 //Frontend Product Details Page 
 Route::get('/product/details_info/{id}/{slug}',[IndexController::class,'ProductDetails_info']);
 
+//Frontend Product Tag Page 
+Route::get('/product/tag/{tags}',[IndexController::class,'ProductTagWise']);
 
 
 
