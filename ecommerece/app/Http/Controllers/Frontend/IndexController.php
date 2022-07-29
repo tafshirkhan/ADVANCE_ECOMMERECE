@@ -117,8 +117,12 @@ class IndexController extends Controller
     }
 
     public function ProductTagWise($tags){
-        $producttag = Product::where('status',1)->where('product_tag',$tags)->orderBy('id','DESC')->get();
+        //$producttag = Product::where('status',1)->where('product_tag',$tags)->orderBy('id','DESC')->get();
+        $producttag = Product::where('status',1)->where('product_tag',$tags)->orderBy('id','DESC')->paginate(4);
 
-        return view('Frontend.Tags.product_tagview',compact('producttag'));
+        $category = Category::orderBy('category_name', 'ASC')->get();
+
+
+        return view('Frontend.Tags.product_tagview',compact('producttag','category'));
     }
 }
