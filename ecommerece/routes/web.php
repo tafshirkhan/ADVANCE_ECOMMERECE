@@ -233,9 +233,11 @@ Route::get('/product/details_info/{id}/{slug}',[IndexController::class,'ProductD
 //Frontend Product Tag Page 
 Route::get('/product/tag/{tags}',[IndexController::class,'ProductTagWise']);
 
+//Sub category wise product:
+Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class,'SubCategoryWiseProduct']);
 
-
-
+//Sub category wise product:
+Route::get('/sub_subcategory/product/{sub_subcat_id}/{slug}', [IndexController::class,'Sub_SubCategoryWiseProduct']);
 
 
 
