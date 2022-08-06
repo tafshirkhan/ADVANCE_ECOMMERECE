@@ -78,6 +78,9 @@
     <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
 
+    {{-- sweetwlert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     {{-- toastr --}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
@@ -111,7 +114,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel"><span id="productname"></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -158,8 +161,8 @@
                         <div class="col-md-4">
                             <!-- Select option -->
                             <div class="form-group" id="sizeArea">
-                                <label for="exampleFormControlSelect1">Select Size</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="size">
+                                <label for="size">Select Size</label>
+                                <select class="form-control" id="size" name="size">
 
 
                                 </select>
@@ -167,19 +170,22 @@
 
 
                             <div class="form-group" id="colorArea">
-                                <label for="exampleFormControlSelect1">Select Color</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="color">
+                                <label for="color">Select Color</label>
+                                <select class="form-control" id="color" name="color">
 
 
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Quantity</label>
-                                <input type="number" class="form-control" id="exampleFormControlInput1"
-                                    value="1" min="1">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" value="1"
+                                    min="1">
                             </div>
-                            <button type="submit" class="btn btn-primary mb-2">Add to cart</button>
+
+                            <input type="hidden" id="product_id">
+                            <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">Add to
+                                cart</button>
 
                         </div>
                     </div>
@@ -218,6 +224,10 @@
                     $('#productbrand').text(data.product.brand.brand_name);
                     $('#productimage').attr('src', '/' + data.product.product_thumb);
 
+                    $('#product_id').val(id);
+                    $('#quantity').val(1);
+
+
                     //product price information
                     if (data.product.discount_price == null) {
                         $('#prosellprice').text('');
@@ -234,11 +244,11 @@
                     if (data.product.product_qty > 0) {
                         $('#available').text('')
                         $('#stockout').text('')
-                        $('#available').text('available')
+                        $('#available').text('Available')
                     } else {
                         $('#available').text('')
                         $('#stockout').text('')
-                        $('#stockout').text('stockout')
+                        $('#stockout').text('Stockout')
                     }
 
                     //product size
@@ -281,6 +291,156 @@
 
                 }
             })
+        }
+        //EndproductView() modal
+
+
+        //Start Add To Cart Product
+        function addToCart() {
+            var productName = $('#productname').text(); //class="modal-title" id
+            var id = $('#product_id').val(); //hidden field id.
+            var color = $('#color option:selected').text(); //select color field id
+            var size = $('#size option:selected').text(); //select size field id
+            var quantity = $('#quantity').val(); //Quantity field id
+
+            //Posting all the deatils
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    color: color,
+                    size: size,
+                    quantity: quantity,
+                    productName: productName
+                },
+                url: "/addcart/data/store/" + id,
+                success: function(data) {
+                    miniCart();
+                    $('#closeModal')
+                        .click(); //This is for after pressing the Ad To Cart button modal will closed
+                    //console.log(data)
+
+
+                    //Sweet Alert message after successfully added to the cart
+                    const sweetAlert = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        sweetAlert.fire({
+                            type: 'success',
+                            title: data
+                                .success //success message will come from CartControler json return
+                        })
+                    } else {
+                        sweetAlert.fire({
+                            type: 'error',
+                            title: data
+                                .error
+                        })
+                    }
+                    //End sweetalert message.
+
+                }
+            })
+
+
+        }
+
+        //End Add To Cart Product
+    </script>
+
+    <script type="text/javascript">
+        function miniCart() {
+            $.ajax({
+                type: 'GET',
+                url: '/product/mini/cart',
+                dataType: 'json',
+                success: function(response) {
+                    //console.log(data)
+                    //from cartSubTotal id comes from Frontend header_blade
+                    $('span[id="cartSubTotal"]').text(response
+                        .minicartTotal); // this is comes from AddToMiniCart method
+                    $('#cartQty').text(response.minicartQty); // this is comes from AddToMiniCart method
+                    var miniCart = ""
+                    //this data.minicarts will comes from CartController AddToMiniCart method.
+                    $.each(response.minicarts, function(key, value) {
+
+                        //below src="/${value.options.image}" will come from CartController AddToCart method
+                        //below ${value.name} will come from CartController AddToCart method
+                        //below ${value.price} will come from CartController AddToCart method
+
+                        miniCart += `<div class="cart-item product-summary">
+                                    <div class="row">
+
+                                            <div class="col-xs-4">
+                                                <div class="image"> <a href="detail.html"><img
+                                                            src="/${value.options.image}" alt=""></a>
+                                                            
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                    <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
+                                                    <div class="price">${value.price} * ${value.qty}</div>
+                                            </div>
+
+                                            <div class="col-xs-1 action"> 
+                                                <button type="submit" id="${value.rowId}" onClick="removeMiniCart(this.id)"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- /.cart-item -->
+                                <div class="clearfix"></div>
+                                <hr>`
+
+
+                    });
+
+                    $('#miniCart').html(miniCart);
+                }
+            })
+        }
+        miniCart();
+
+
+        //Remove product from mini cart
+        function removeMiniCart(rowId) {
+            $.ajax({
+                type: "GET",
+                url: '/minicart/remove_product/' + rowId,
+                dataType: 'josn',
+                success: function(data) {
+                    miniCart(); //for without loading the page we want remove from the mini cart 
+
+                    //Sweet Alert message after remove from the mini cart
+                    const sweetAlert = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        sweetAlert.fire({
+                            type: 'success',
+                            title: data
+                                .success //success message will come from CartControler RemoveFromMiniCart method json return
+                        })
+                    } else {
+                        sweetAlert.fire({
+                            type: 'error',
+                            title: data
+                                .error
+                        });
+                    }
+                    //End sweetalert message.
+                }
+            });
         }
     </script>
 

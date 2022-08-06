@@ -142,7 +142,7 @@
                         </div><!-- /.gallery-holder -->
                         <div class='col-sm-6 col-md-7 product-info-block'>
                             <div class="product-info">
-                                <h1 class="name">
+                                <h1 class="name" id="productname">
                                     {{ $product->product_name }}
                                 </h1>
 
@@ -225,18 +225,24 @@
 
                                     <div class="col-sm-6">
 
-                                        <div class="form-group">
-                                            <label class="info-title control-label">Select Color<span>*</span></label>
-                                            <select class="form-control unicase-form-control selectpicker"
-                                                style="display: none;">
-                                                <option selected="" disabled="">Select Color</option>
-                                                @foreach ($product_color as $product_color)
-                                                    <option value="{{ $product_color }}">
-                                                        {{ ucwords($product_color) }}
-                                                    </option>
-                                                @endforeach
 
-                                            </select>
+                                        <div class="form-group">
+                                            <!--This is for if there are no color available then this select part weill kepp hidden -->
+                                            @if ($product->product_color == null)
+                                            @else
+                                                <label class="info-title control-label">Select
+                                                    Color<span>*</span></label>
+                                                <select class="form-control unicase-form-control selectpicker"
+                                                    style="display: none;" id="color ">
+                                                    <option selected="" disabled="">Select Color</option>
+                                                    @foreach ($product_color as $product_color)
+                                                        <option value="{{ $product_color }}">
+                                                            {{ ucwords($product_color) }}
+                                                        </option>
+                                                    @endforeach
+
+                                                </select>
+                                            @endif
                                         </div>
 
                                     </div>
@@ -244,15 +250,22 @@
                                     <div class="col-sm-6">
 
                                         <div class="form-group">
-                                            <label class="info-title control-label">Slect Size <span>*</span></label>
-                                            <select class="form-control unicase-form-control selectpicker"
-                                                style="display: none;">
-                                                <option selected="" disabled="">Select Size</option>
-                                                @foreach ($product_size as $product_size)
-                                                    <option value="{{ $product_size }}">{{ ucwords($product_size) }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <!--This is for if there are no size available then this select part weill kepp hidden -->
+
+                                            @if ($product->product_size)
+                                            @else
+                                                <label class="info-title control-label">Slect Size
+                                                    <span>*</span></label>
+                                                <select class="form-control unicase-form-control selectpicker"
+                                                    style="display: none;" id="size">
+                                                    <option selected="" disabled="">Select Size</option>
+                                                    @foreach ($product_size as $product_size)
+                                                        <option value="{{ $product_size }}">
+                                                            {{ ucwords($product_size) }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            @endif
                                         </div>
 
                                     </div>
@@ -276,14 +289,18 @@
                                                         <div class="arrow minus gradient"><span class="ir"><i
                                                                     class="icon fa fa-sort-desc"></i></span></div>
                                                     </div>
-                                                    <input type="text" value="1">
+                                                    <input type="text" id="quantity" value="1"
+                                                        min="1">
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" id="product_id" value="{{ $product->id }}"
+                                            min="1">
 
                                         <div class="col-sm-7">
-                                            <a href="#" class="btn btn-primary"><i
-                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                            <button type="submit" onclick="addToCart()" class="btn btn-primary"><i
+                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO
+                                                CART</button>
                                         </div>
 
 
