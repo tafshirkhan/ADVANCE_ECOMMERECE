@@ -413,7 +413,7 @@
             $.ajax({
                 type: "GET",
                 url: '/minicart/remove_product/' + rowId,
-                dataType: 'josn',
+                dataType: 'json',
                 success: function(data) {
                     miniCart(); //for without loading the page we want remove from the mini cart 
 
@@ -443,6 +443,141 @@
             });
         }
     </script>
+
+    <!--START WISHLIST  -->
+    <script type="text/javascript">
+        function addToWishlist(product_id) {
+            $.ajax({
+                type: "POST",
+                url: '/addto/wishlist/' + product_id,
+                dataType: 'json',
+
+
+                success: function(data) {
+
+                    //Sweet Alert message
+                    const sweetAlert = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        sweetAlert.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data
+                                .success //success message will come from CartControler RemoveFromMiniCart method json return
+                        })
+                    } else {
+                        sweetAlert.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data
+                                .error
+                        });
+                    }
+                    //End sweetalert message.
+
+                }
+            });
+        }
+    </script>
+    <!--END WISHLIST  -->
+
+    <!--START FOR LOADING ALL THE WISHLIST  -->
+
+    <script type="text/javascript">
+        function wishList() {
+            $.ajax({
+                type: 'GET',
+                //here '/user is the middleware name'
+                url: '/user/get/wishlist_product',
+                dataType: 'json',
+                success: function(response) {
+
+                    var rows = ""
+                    //this response will comes from WishController GetWishlistProduct method.
+                    $.each(response, function(key, value) {
+                        //Below product comes from Wishlist models 'product' method
+                        rows += `<tr>
+                                    <td class="col-md-2"><img src="/${value.product.product_thumb}" alt="imga"></td>
+                                    <td class="col-md-7">
+                                        <div class="product-name"><a href="#">${value.product.product_name}</a></div>
+
+                                        <div class="price">
+                                            ${value.product.discount_price == null
+                                                ?`${value.product.selling_price}`
+                                                :
+                                                `${value.product.discount_price}<span>${value.product.selling_price}</span>`
+                                            
+                                            }                             
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <button class="btn btn-primary icon" type="button"
+                                                            data-toggle="modal" data-target="#staticBackdrop"
+                                                            id="${value.product_id}" onclick="productView(this.id)"
+                                                            title="Add Cart">Add to Cart</button>
+                                    </td>
+                                    <td class="col-md-1 close-btn">
+                                        <button type="submit" class="" id="${value.id}" onClick="RemoveFromWishlist(this.id)"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>`
+                        //${value.id} wishlist table id
+
+
+                    });
+
+                    $('#wishList').html(rows);
+                }
+            })
+        }
+        wishList();
+
+        //Start remove product function from wishlist
+
+        function RemoveFromWishlist(id) {
+            $.ajax({
+                type: "GET",
+                //here '/user is the middleware name'
+                url: '/user/wishlist/remove_product/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    wishList(); //for without loading the page we want remove from the wishlist
+
+                    //Sweet Alert message after remove from the mini cart
+                    const sweetAlert = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        sweetAlert.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data
+                                .success //success message will come from CartControler RemoveFromMiniCart method json return
+                        })
+                    } else {
+                        sweetAlert.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data
+                                .error
+                        });
+                    }
+                    //End sweetalert message.
+                }
+            });
+        }
+        //End Remove product from wishlist
+    </script>
+
+    <!--END FOR LOADING ALL THE WISHLIST PRODUCT  -->
+
 
 </body>
 

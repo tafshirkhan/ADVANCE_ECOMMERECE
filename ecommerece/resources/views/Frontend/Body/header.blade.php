@@ -7,14 +7,15 @@
                 <div class="cnt-account">
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-                        <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+                        <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
 
 
                         <li>
                             @auth
-                                <a href="{{ route('login') }}"><i class="icon fa fa-user"></i>User Profile</a>
+                                <a href="{{ route('login') }}"><i class="icon fa fa-user"></i><a
+                                        href="{{ route('dashboard') }}">User Profile</a></a>
                             @else
                             <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login</a></li>
                             <li><a href="{{ route('register') }}"><i class="icon fa fa-lock"></i>Register</a></li>

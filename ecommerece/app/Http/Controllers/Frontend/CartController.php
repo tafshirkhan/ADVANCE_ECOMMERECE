@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Wishlist;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Auth;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {
@@ -65,5 +68,32 @@ class CartController extends Controller
     public function RemoveFromMiniCart($rowId){
         Cart::remove($rowId);
         return response()->json(['success'=>'Removed from your cart']);
+    }
+
+    public function AddToWishlist(Request $req, $product_id){
+        //First check whether the user is login or not
+        if(Auth::check()){
+            //If the user is logged in only then product will insert into the whislist
+            $userExist = Wishlist::where('user_id',Auth::id())->where('product_id', $product_id)->first();
+            
+            if(!$userExist){
+                Wishlist::insert([
+                'user_id' => Auth::id(),
+                'product_id' => $product_id,
+                'created_at' => Carbon::now(),
+               ]);
+
+               return response()->json(['success'=>'Added to your wishlist']);
+
+            }else{
+               return response()->json(['error'=>'Product already exist to your wishlist']);
+
+            }
+
+        }else{
+          return response()->json(['error'=>'You need to login first']);
+
+        }
+
     }
 }
