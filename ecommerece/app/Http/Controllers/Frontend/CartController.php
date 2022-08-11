@@ -35,13 +35,13 @@ class CartController extends Controller
         else{
             Cart::add([
                 'id' => $id, 
-                'name' => $req->productName, //productName from master.blade AddToPeoduct 
-                'qty' => $req->quantity, //from master.blade AddToPeoduct 
+                'name' => $req->productName, //productName from master.blade AddToProduct 
+                'qty' => $req->quantity, //from master.blade AddToProduct 
                 'price' => $product->discount_price, //from db field name
                 'weight' => 1, 
                 'options' => [
                     'image' => $product->product_thumb, //db field name
-                    'color' => $req->color, //from master.blade AddToPeoduct 
+                    'color' => $req->color, //from master.blade AddToProduct 
                     'size' => $req->size,
                     ]
                 ]);

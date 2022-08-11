@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\MyCartPageController;
 
 
 
@@ -270,10 +271,24 @@ function(){
     Route::get('/get/wishlist_product', [WishlistController::class,'GetWishlistProduct']);
 
     //Remove product from the Wishlist
-    Route::get('/wishlist/remove_product/{id}', [WishlistController::class,'RemoveWishlistProduct']);
-
+    Route::get('/wishlist/remove_product/{id}', [WishlistController::class,'RemoveWishlistProduct']);  
 });
 
+///////MY CART ALL ROUTES ///////
+    //My Cart
+    Route::get('/mycart', [MyCartPageController::class,'MyCartView'])->name('mycart');
+
+    //Get my cart product.
+    Route::get('/user/get/mycart_product', [MyCartPageController::class,'GetMyCartProduct']);
+    
+    //Remove from my cart.
+    Route::get('/user/mycart/remove/{rowId}', [MyCartPageController::class,'RemoveMyCartProduct']);
+    
+    //Increment my cart.
+    Route::get('/cart/increment/{rowId}', [MyCartPageController::class,'CartIncrement']);
+
+    //Decrement my cart.
+    Route::get('/cart/decrement/{rowId}', [MyCartPageController::class,'CartDecrement']);
 
 
 

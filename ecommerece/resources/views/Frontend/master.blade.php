@@ -579,6 +579,152 @@
     <!--END FOR LOADING ALL THE WISHLIST PRODUCT  -->
 
 
+
+    <!--START MY CART  -->
+
+    <script type="text/javascript">
+        function myCart() {
+            $.ajax({
+                type: 'GET',
+                //here '/user is the middleware name' which is check whether the user is logged in not
+                url: '/user/get/mycart_product',
+                dataType: 'json',
+                success: function(response) {
+
+                    var rows = ""
+                    //this response.mycarts will comes from MyCartPageController GetMyCartProduct method.
+                    $.each(response.mycarts, function(key, value) {
+                        //Below product comes from Wishlist models 'product' method
+                        //And {options.image} comes from CartController 'AddToCart' method
+                        //And {value.name} comes from CartController 'AddToCart' method
+                        //And {value.price} comes from CartController 'AddToCart' method
+                        rows += `<tr>
+                                    <td class="col-md-2"><img src="/${value.options.image}" alt="imga" style="width:70px; height:70px;"></td>
+                                    <td class="col-md-2">
+                                        <div class="product-name"><a href="#">${value.name}</a></div>
+
+                                        <div class="price">
+                                            ${value.price}                             
+                                        </div>
+                                    </td>
+
+                                    <td class="col-md-2">
+                                        <strong>${value.options.color}</strong>
+                                    </td>
+                                    <br>
+                                    <td class="col-md-2">
+                                        ${value.options.size == null
+                                            ? `<span>..</span>`
+                                            :
+                                            `<strong>${value.options.size}</strong>`
+                                        }
+                                    </td>
+
+                                    <td class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm" id="${value.rowId}" onClick="CartIncrement(this.id)">+</button>
+                                        <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:30px; height:25px;">
+                                        ${value.qty > 1
+                                            ?`<button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" onClick="CartDecrement(this.id)">-</button>`
+                                            :`<button type="submit" class="btn btn-danger btn-sm" disabled="">-</button>`
+                                        }
+                                    </td>
+
+                                    <td class="col-md-2">
+                                        <strong>${value.subtotal}</strong>
+                                    </td>
+
+
+                                    <td class="col-md-1 close-btn">
+                                        <button type="submit" class="" id="${value.rowId}" onClick="RemoveFromMyCart(this.id)"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>`
+                        //${value.subtotal} bumbummn package which calculate the subtotal of the product automativcally
+                        //${value.id} wishlist table id
+
+
+                    });
+
+                    $('#mycartPage').html(rows); //id from mycart_view page
+                }
+            })
+        }
+        myCart();
+
+        //Start MyCart remove product function 
+
+        function RemoveFromMyCart(id) {
+            $.ajax({
+                type: "GET",
+                //here '/user is the middleware name'
+                url: '/user/mycart/remove/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    myCart(); //for without loading the page we want remove from the cart
+                    miniCart(); //for without loading the page we want remove from the minicart
+
+                    //Sweet Alert message after remove from the mini cart
+                    const sweetAlert = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        sweetAlert.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data
+                                .success //success message will come from CartControler RemoveFromMiniCart method json return
+                        })
+                    } else {
+                        sweetAlert.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data
+                                .error
+                        });
+                    }
+                    //End sweetalert message.
+                }
+            });
+        }
+        //End Remove My Cart product
+
+
+        //Start CartIncrement
+        function CartIncrement(rowId) {
+            $.ajax({
+                type: 'GET',
+                url: "/cart/increment/" + rowId,
+                dataType: 'json',
+                success: function(data) {
+                    myCart();
+                    miniCart();
+
+                }
+            });
+        }
+        //End CartIncrement
+
+        //Start Cart Decrement
+        function CartDecrement(rowId) {
+            $.ajax({
+                type: 'GET',
+                url: "/cart/decrement/" + rowId,
+                dataType: 'json',
+                success: function(data) {
+                    myCart();
+                    miniCart();
+                }
+            });
+        }
+        //End Cart Decrement
+    </script>
+
+    <!--END MY CART -->
+
+
 </body>
 
 </html>
