@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2022 at 01:22 PM
+-- Generation Time: Aug 12, 2022 at 07:21 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -45,7 +45,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '2022-06-01 12:36:47', '$2y$10$HbqB8chXRtpC5H7i4XzWXetEpD216cxk1063AcABgW8n9mAEkO/2K', '3fPeAanS4bAomFfndBKx8KaM65IzDvoUm8pcNmFONB7fbKUtPiYyMTfCplsb', NULL, '202206041841images.jpg', '2022-06-01 12:36:47', '2022-06-04 13:13:33');
+(1, 'Admin', 'admin@gmail.com', '2022-06-01 12:36:47', '$2y$10$HbqB8chXRtpC5H7i4XzWXetEpD216cxk1063AcABgW8n9mAEkO/2K', 'JVWkAKgjEtBeVPH4sr1sSy3cIaanHoRdGblMFkGVHfrytkTvJjI450ApPW5U', NULL, '202206041841images.jpg', '2022-06-01 12:36:47', '2022-06-04 13:13:33');
 
 -- --------------------------------------------------------
 
@@ -68,8 +68,10 @@ CREATE TABLE `brands` (
 
 INSERT INTO `brands` (`id`, `brand_name`, `brand_slug`, `brand_image`, `created_at`, `updated_at`) VALUES
 (3, 'Huawei', 'huawei', 'upload/brand/1736351178927528.png', NULL, '2022-06-22 10:33:04'),
-(4, 'Apple 1', 'apple 1', 'upload/brand/1736348419934090.png', NULL, '2022-06-22 10:10:42'),
-(7, 'Yellow', 'yellow', 'upload/brand/1737085071917014.png', NULL, NULL);
+(4, 'Apple', 'apple', 'upload/brand/1736348419934090.png', NULL, '2022-07-08 11:49:39'),
+(7, 'Yellow', 'yellow', 'upload/brand/1737085071917014.png', NULL, NULL),
+(8, 'Samsung', 'samsung', 'upload/brand/1737807776386920.jpg', NULL, NULL),
+(9, 'One Plus', 'one plus', 'upload/brand/1737807891698962.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -91,10 +93,34 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `category_icon`, `created_at`, `updated_at`) VALUES
-(5, 'Fashion', 'fashion', 'fa fa-female', NULL, NULL),
-(6, 'Electronics', 'electronics', 'fa fa-camera', NULL, NULL),
-(7, 'Home', 'home', 'fa fa-handshake-o', NULL, NULL),
-(8, 'Appliances', 'appliances', 'fa fa-cart-arrow-down', NULL, NULL);
+(5, 'Fashion', 'fashion', 'fa fa-shopping-bag', NULL, '2022-07-07 13:08:16'),
+(6, 'Electronics', 'electronics', 'fa fa-laptop', NULL, '2022-07-07 13:08:34'),
+(7, 'Home', 'home', 'fa fa-diamond', NULL, '2022-07-07 13:08:57'),
+(8, 'Appliances', 'appliances', 'fa fa-paper-plane', NULL, '2022-07-07 13:09:54'),
+(9, 'Grocery', 'grocery', 'fa fa-envira', NULL, '2022-07-08 12:36:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cupons`
+--
+
+CREATE TABLE `cupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `coupon_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `coupon_discount` int(11) NOT NULL,
+  `coupon_validity` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cupons`
+--
+
+INSERT INTO `cupons` (`id`, `coupon_name`, `coupon_discount`, `coupon_validity`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'HEART-ATTACK', 30, '2022-08-24', 1, '2022-08-11 23:17:13', '2022-08-11 23:17:13');
 
 -- --------------------------------------------------------
 
@@ -142,7 +168,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2022_06_25_173909_create_sub_categories_table', 6),
 (12, '2022_06_27_173043_create_sub__sub_categories_table', 7),
 (13, '2022_06_28_172256_create_products_table', 8),
-(14, '2022_06_28_174002_create_multi_images_table', 8);
+(14, '2022_06_28_174002_create_multi_images_table', 8),
+(15, '2022_07_06_174207_create_sliders_table', 9),
+(16, '2022_08_06_091532_create_wishlists_table', 10),
+(17, '2022_08_12_040507_create_cupons_table', 11);
 
 -- --------------------------------------------------------
 
@@ -163,7 +192,13 @@ CREATE TABLE `multi_images` (
 --
 
 INSERT INTO `multi_images` (`id`, `product_id`, `photo_name`, `created_at`, `updated_at`) VALUES
-(1, 1, 'upload/product/multiImage/1737356361117183.jpg', '2022-06-30 12:20:20', '2022-07-03 12:15:40');
+(1, 1, 'upload/product/multiImage/1737356361117183.jpg', '2022-06-30 12:20:20', '2022-07-03 12:15:40'),
+(6, 3, 'upload/product/multiImage/1737808403417746.jpg', '2022-07-08 12:00:41', NULL),
+(7, 3, 'upload/product/multiImage/1737808403487837.jpg', '2022-07-08 12:00:41', NULL),
+(8, 4, 'upload/product/multiImage/1737808656279923.jpg', '2022-07-08 12:04:42', NULL),
+(9, 4, 'upload/product/multiImage/1737808656351353.jpg', '2022-07-08 12:04:42', NULL),
+(10, 5, 'upload/product/multiImage/1737808882609122.jpg', '2022-07-08 12:08:18', NULL),
+(11, 5, 'upload/product/multiImage/1737808882680117.jpg', '2022-07-08 12:08:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -233,7 +268,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `brand_id`, `category_id`, `subcategory_id`, `sub_subcategory_id`, `product_name`, `product_slug`, `product_code`, `product_qty`, `product_tag`, `product_size`, `product_color`, `selling_price`, `discount_price`, `short_desc`, `long_desc`, `product_thumb`, `hot_deals`, `featured`, `special_offer`, `special_deals`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, 6, 16, 81, 'Huawei SV', 'huawei sv', 'H-101', '10', 'chargers,adapter,cable', '5v,10v', 'black', '500', '400', 'Mobile  Mobile Chargers for Android Phones 2 USB Charger (2.4A 5V) Compatible for Smartphone', '<p><strong>The maximum power is 12W and the maximum current is 2.4 Amp. When two output ports are used at the same time, each output port reaches 1.2A on average after intelligent shunting, enables you to charge two devices simultaneously.</strong></p>', 'upload/product/thumbImage/1737362271952200.jpg', 1, NULL, 1, NULL, 1, '2022-07-03 11:13:35', '2022-07-04 05:10:25');
+(1, 3, 6, 16, 81, 'Huawei SV', 'huawei sv', 'H-101', '10', 'chargers,adapter', '5v,10v', 'black', '500', '400', 'Mobile  Mobile Chargers for Android Phones 2 USB Charger (2.4A 5V) Compatible for Smartphone', '<p><strong>The maximum power is 12W and the maximum current is 2.4 Amp. When two output ports are used at the same time, each output port reaches 1.2A on average after intelligent shunting, enables you to charge two devices simultaneously.</strong></p>', 'upload/product/thumbImage/1737362271952200.jpg', NULL, 1, 1, NULL, 1, '2022-07-28 05:37:34', '2022-07-28 05:37:34'),
+(3, 8, 8, 27, 50, 'Samsung Refrigerator', 'samsung refrigerator', 'RT27HAR9DS8/D3', '10', 'refrigerator', '120L,220L', 'black,white,gray', '40000', '35000', 'Product details of Samsung Refrigerator RT27HAR9DS8/D3', '<p style=\"text-align:justify\"><strong>Physical Specification Net Width(mm): 600 mm Net Case Height with Hinge(mm): 1715 mm Net Depth with Door Handle(mm): 672 mm Net Depth without Door Handle(mm): 672 mm Net Depth without Door(mm): 605 mm Packing Width(mm): 631 mm Packing Height(mm): 1780 mm Packing Depth(mm): 699 mm Net Weight(kg): 59 kg Packing Weight(kg): 64 kg</strong></p>', 'upload/product/thumbImage/1737808403334906.jpg', 1, NULL, 1, NULL, 1, '2022-07-28 05:33:19', '2022-07-28 05:33:19'),
+(4, 8, 6, 14, 72, 'Samsung Galaxy Book', 'samsung galaxy book', 'S-L010', '5', 'laptop', '13\",16\"', 'black,gray', '80000', '79000', 'The Galaxy experience', '<p style=\"text-align:justify\"><strong>Galaxy Books for business</strong></p>\r\n\r\n<p style=\"text-align:justify\"><strong>Enjoy exclusive volume discounts with a Samsung Business Account, 0% Samsung Business Financing and free shipping. Plus, eligible organizations can shop tax-free with a Samsung Tax Exempt Account.</strong></p>', 'upload/product/thumbImage/1737808656190068.jpg', 1, 1, NULL, NULL, 1, '2022-08-02 04:22:57', '2022-08-02 04:22:57'),
+(5, 7, 5, 9, 15, 'Jeans Stitch', 'jeans stitch', 'J-101', '10', 'Jeans', '31,32,33', 'black,green', '1000', NULL, 'The Best Men’s Jeans', '<p style=\"text-align:justify\"><strong>A great pair of jeans can be the foundation of an outfit: Though the jeans themselves may not draw attention, they will elevate whatever else you wear,</strong></p>', 'upload/product/thumbImage/1737808882519205.jpg', 1, NULL, NULL, 1, 1, '2022-07-28 05:32:56', '2022-07-28 05:32:56');
 
 -- --------------------------------------------------------
 
@@ -255,7 +293,34 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('66jmk8i2xLZviA1rL6IUmuPv2kH623SSVhcX6XJS', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUGhxUjNjSWd3elppWW9icTdYZGtDYTVuUXljdUlKb1JYMlNLb05BbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0L21hbmFnZXByb2R1Y3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxOToicGFzc3dvcmRfaGFzaF9hZG1pbiI7czo2MDoiJDJ5JDEwJEhicUI4Y2hYUnRwQzVIN2k0WHpXWGV0RXBEMjE2Y3hrMTA2M0FjQUJnVzhuOW1BRWtPLzJLIjt9', 1656933687);
+('8mvTTnrF4cFOStDTum8822RSrN5NXLjoil0Lwq6b', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMXFIWUpLaFF5cXluYTFhWk1vNkYzMGxTdzNUaG4wZ1FtN0dwMndreiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jdXBvbi9hbGwvY291cG9ucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE5OiJwYXNzd29yZF9oYXNoX2FkbWluIjtzOjYwOiIkMnkkMTAkSGJxQjhjaFhSdHBDNUg3aTRYeldYZXRFcEQyMTZjeGsxMDYzQWNBQmdXOG45bUFFa08vMksiO30=', 1660281610),
+('lqX4TBswuXuinimosHcPGtZCiUntZwHTCbT6pJZY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT3R3cHR5QlVpRnVvTEh4bDdOdDh1RDRHd3JrUUJYMkhFZERCRGlPQyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1660210757);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `slider_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sliders`
+--
+
+INSERT INTO `sliders` (`id`, `slider_image`, `title`, `desc`, `status`, `created_at`, `updated_at`) VALUES
+(3, 'upload/slider/1737807542573561.jpg', 'Slider 1', 'Slider 1 description', 1, NULL, '2022-07-08 11:47:00'),
+(4, 'upload/slider/1737807557839939.jpg', 'Slider 2', 'Slider 2 description', 1, NULL, '2022-07-08 11:47:15'),
+(5, 'upload/slider/1737807573330048.jpg', 'Slider 3', 'Slider 3  description', 1, NULL, '2022-07-08 11:47:30'),
+(6, 'upload/slider/1737807590891208.jpg', 'Slider 4', 'Slider 4 description', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -430,7 +495,9 @@ INSERT INTO `sub__sub_categories` (`id`, `category_id`, `subcategory_id`, `sub_s
 (117, 7, 19, '3 Door Wardrobe', '3 door wardrobe', NULL, NULL),
 (118, 7, 19, 'Wood Wardrobe', 'wood wardrobe', NULL, NULL),
 (119, 7, 19, 'Steel Wardrobe', 'steel wardrobe', NULL, NULL),
-(120, 7, 19, 'Double Sofa', 'double sofa', NULL, NULL);
+(120, 7, 19, 'Double Sofa', 'double sofa', NULL, NULL),
+(121, 8, 24, 'Huawei', 'huawei', NULL, NULL),
+(122, 6, 15, 'Samsung', 'samsung', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -461,7 +528,21 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
 (1, 'User', 'user1@gmail.com', '01700000000', NULL, '$2y$10$.BNtkJfD3rRrF492tXdzmeYUjTJGd8S63kIx2VmSjtvdIGNV5XNLa', NULL, NULL, NULL, NULL, NULL, '202206091703images (1).jpg', '2022-06-01 12:15:45', '2022-06-09 11:03:37'),
-(2, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', NULL, '$2y$10$y0hpHQJSBppD40CNMSvX3.vxIIDywEyH66xwn7ilIbsX/zoW.pms6', NULL, NULL, NULL, 'kJCoK6I44FAK8xM1PbRv7tQ2ZAZYUCJj3vj2LZ9eWLKlmQZQBbcxS30vE17a', NULL, '202206071800images (1).jpg', '2022-06-06 12:48:01', '2022-06-07 12:03:56');
+(2, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', NULL, '$2y$10$y0hpHQJSBppD40CNMSvX3.vxIIDywEyH66xwn7ilIbsX/zoW.pms6', NULL, NULL, NULL, 'vM7GNH4yciVbfhZ5YfGdBsvS0lzw4QVqQjh0eSz1UvrK15fL4T3r2UY5tq0J', NULL, '202206071800images (1).jpg', '2022-06-06 12:48:01', '2022-06-07 12:03:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlists`
+--
+
+CREATE TABLE `wishlists` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -484,6 +565,12 @@ ALTER TABLE `brands`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cupons`
+--
+ALTER TABLE `cupons`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -534,6 +621,12 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
@@ -553,6 +646,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -566,13 +665,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `cupons`
+--
+ALTER TABLE `cupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -584,13 +689,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `multi_images`
 --
 ALTER TABLE `multi_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -602,7 +707,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sub_categories`
@@ -614,13 +725,19 @@ ALTER TABLE `sub_categories`
 -- AUTO_INCREMENT for table `sub__sub_categories`
 --
 ALTER TABLE `sub__sub_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
