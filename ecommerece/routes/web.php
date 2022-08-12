@@ -15,6 +15,8 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\MyCartPageController;
+use App\Http\Controllers\Backend\CuponController;
+
 
 
 
@@ -275,23 +277,43 @@ function(){
 });
 
 ///////MY CART ALL ROUTES ///////
-    //My Cart
-    Route::get('/mycart', [MyCartPageController::class,'MyCartView'])->name('mycart');
+//My Cart
+Route::get('/mycart', [MyCartPageController::class,'MyCartView'])->name('mycart');
 
-    //Get my cart product.
-    Route::get('/user/get/mycart_product', [MyCartPageController::class,'GetMyCartProduct']);
+//Get my cart product.
+Route::get('/user/get/mycart_product', [MyCartPageController::class,'GetMyCartProduct']);
     
-    //Remove from my cart.
-    Route::get('/user/mycart/remove/{rowId}', [MyCartPageController::class,'RemoveMyCartProduct']);
+//Remove from my cart.
+Route::get('/user/mycart/remove/{rowId}', [MyCartPageController::class,'RemoveMyCartProduct']);
     
-    //Increment my cart.
-    Route::get('/cart/increment/{rowId}', [MyCartPageController::class,'CartIncrement']);
+//Increment my cart.
+Route::get('/cart/increment/{rowId}', [MyCartPageController::class,'CartIncrement']);
 
-    //Decrement my cart.
-    Route::get('/cart/decrement/{rowId}', [MyCartPageController::class,'CartDecrement']);
+//Decrement my cart.
+Route::get('/cart/decrement/{rowId}', [MyCartPageController::class,'CartDecrement']);
 
 
+//CUPONS
+Route::prefix('cupon')->group(function(){
 
+//Coupons view page
+Route::get('/all/coupons',[CuponController::class,'ViewAllCupons'])->name('all.coupons');
+
+//Add new Coupons 
+Route::get('/add/coupons',[CuponController::class,'AddNewCupons'])->name('add.coupons');
+
+//Store Coupon
+Route::post('/store/coupon',[CuponController::class, 'StoreCoupon'])->name('store.coupon');
+
+//Add new Coupons 
+Route::get('/edit/coupons/{id}',[CuponController::class,'EditCoupons'])->name('edit.coupons');
+
+//Update Coupon
+Route::post('/update/coupon/{id}',[CuponController::class, 'UpdateCoupon'])->name('update.coupon');
+
+//Delete Coupons 
+Route::get('/delete/coupons/{id}',[CuponController::class,'DeleteCoupons'])->name('delete.coupons');
+});
 
 
 
