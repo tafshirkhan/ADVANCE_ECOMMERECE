@@ -317,7 +317,7 @@
                 success: function(data) {
                     miniCart();
                     $('#closeModal')
-                        .click(); //This is for after pressing the Ad To Cart button modal will closed
+                        .click(); //This is for after pressing the Add To Cart button modal will closed
                     //console.log(data)
 
 

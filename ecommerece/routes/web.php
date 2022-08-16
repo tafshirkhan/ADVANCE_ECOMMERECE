@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\MyCartPageController;
 use App\Http\Controllers\Backend\CuponController;
+use App\Http\Controllers\Backend\AreaOfShippingController;
 
 
 
@@ -316,6 +317,75 @@ Route::get('/delete/coupons/{id}',[CuponController::class,'DeleteCoupons'])->nam
 });
 
 
+//Area of shipping
+Route::prefix('shipping')->group(function(){
+
+//////DIVISION////
+
+//All division view page
+Route::get('/all/division',[AreaOfShippingController::class,'ViewAllDivision'])->name('all.division');
+
+//Add new division
+Route::get('/add/division',[AreaOfShippingController::class,'AddNewDivision'])->name('add.division');
+
+//Store Division
+Route::post('/store/division',[AreaOfShippingController::class, 'StoreDivision'])->name('store.division');
+
+//Edit division 
+Route::get('/edit/division/{id}',[AreaOfShippingController::class,'EditDivision'])->name('edit.division');
+
+//Update division
+Route::post('/update/division/{id}',[AreaOfShippingController::class, 'UpdateDivision'])->name('update.division');
+
+//Delete division
+Route::get('/delete/division/{id}',[AreaOfShippingController::class,'DeleteDivision'])->name('delete.division');
+
+
+//////DISTRICT////
+
+//All division view page 
+Route::get('/all/district',[AreaOfShippingController::class,'ViewAllDistrict'])->name('all.district');
+
+//Add new district
+Route::get('/add/district',[AreaOfShippingController::class,'AddNewDistrict'])->name('add.district');
+
+//Store district
+Route::post('/store/district',[AreaOfShippingController::class, 'StoreDistrict'])->name('store.district');
+
+//Edit district
+Route::get('/edit/district/{id}',[AreaOfShippingController::class,'EditDistrict'])->name('edit.district');
+
+//Update district
+Route::post('/update/district/{id}',[AreaOfShippingController::class, 'UpdateDistrict'])->name('update.district');
+
+//Delete district
+Route::get('/delete/district/{id}',[AreaOfShippingController::class,'DeleteDistrict'])->name('delete.district');
+
+//////STATES////
+
+//All states view page 
+Route::get('/all/states',[AreaOfShippingController::class,'ViewAllStates'])->name('all.states');
+
+//Add new state
+Route::get('/add/state',[AreaOfShippingController::class,'AddNewState'])->name('add.state');
+
+//Store district
+Route::post('/store/state',[AreaOfShippingController::class, 'StoreState'])->name('store.state');
+
+//Edit state
+Route::get('/edit/state/{id}',[AreaOfShippingController::class,'EditState'])->name('edit.state');
+
+//Update state
+Route::post('/update/state/{id}',[AreaOfShippingController::class, 'UpdateState'])->name('update.state');
+
+//Delete state
+Route::get('/delete/state/{id}',[AreaOfShippingController::class,'DeleteState'])->name('delete.state');
+
+//this route is for ajax which is from add addnewstate file for getting the district field automatically whileselect any division
+Route::get('/division/district/ajax/{division_id}',[AreaOfShippingController::class,'GetAllDistrict']);
+
+
+});
 
 
 

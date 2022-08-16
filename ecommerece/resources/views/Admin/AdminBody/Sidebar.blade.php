@@ -140,6 +140,36 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ $prefix == '/shipping' ? 'active' : '' }}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Area of Shipping</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'all.division' ? 'active' : '' }}"><a
+                            href="{{ route('all.division') }}"><i class="ti-more"></i>Available Division</a></li>
+                    <li class="{{ $route == 'add.division' ? 'active' : '' }}"><a
+                            href="{{ route('add.division') }}"><i class="ti-more"></i>Add Division</a></li>
+
+                    <li class="{{ $route == 'all.district' ? 'active' : '' }}"><a
+                            href="{{ route('all.district') }}"><i class="ti-more"></i>Available District</a></li>
+                    <li class="{{ $route == 'add.district' ? 'active' : '' }}"><a
+                            href="{{ route('add.district') }}"><i class="ti-more"></i>Add District</a></li>
+
+
+
+                    <li class="{{ $route == 'all.states' ? 'active' : '' }}"><a href="{{ route('all.states') }}"><i
+                                class="ti-more"></i>Available States</a></li>
+                    <li class="{{ $route == 'add.state' ? 'active' : '' }}"><a href="{{ route('add.state') }}"><i
+                                class="ti-more"></i>Add State</a></li>
+
+
+                </ul>
+            </li>
+
             <li class="header nav-small-cap">User Interface</li>
 
             <li class="treeview">

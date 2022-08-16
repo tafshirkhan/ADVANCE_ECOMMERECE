@@ -2,6 +2,7 @@
 @section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+
     <div class="container-full">
         <!-- Content Header (Page header) -->
 
@@ -372,11 +373,6 @@
 
 
 
-
-
-
-
-
             $('select[name="subcategory_id"]').on('change', function() {
                 var subcategory_id = $(this).val();
                 if (subcategory_id) {
@@ -399,6 +395,7 @@
             }); /* SubCategory & Sub_SubCategort end */
         });
     </script>
+
     <script type="text/javascript">
         /* This script for showing the thumb image while choosing */
         function mainThumbUrl(input) {
