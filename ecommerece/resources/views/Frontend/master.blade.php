@@ -659,8 +659,12 @@
                 url: '/user/mycart/remove/' + id,
                 dataType: 'json',
                 success: function(data) {
+
                     myCart(); //for without loading the page we want remove from the cart
                     miniCart(); //for without loading the page we want remove from the minicart
+                    calculatedCouponAmount();
+                    $('#applyCouponField').show(); //This will show the coupon filed
+                    $('#coupon_name').val('');
 
                     //Sweet Alert message after remove from the mini cart
                     const sweetAlert = Swal.mixin({
@@ -699,6 +703,7 @@
                 url: "/cart/increment/" + rowId,
                 dataType: 'json',
                 success: function(data) {
+                    calculatedCouponAmount();
                     myCart();
                     miniCart();
 
@@ -714,6 +719,7 @@
                 url: "/cart/decrement/" + rowId,
                 dataType: 'json',
                 success: function(data) {
+                    calculatedCouponAmount();
                     myCart();
                     miniCart();
                 }
@@ -723,6 +729,162 @@
     </script>
 
     <!--END MY CART -->
+
+
+    <!--APPLY COUPON START -->
+    <script type="text/javascript">
+        function applyCoupon() {
+            var coupon_name = $('#coupon_name').val(); //from master.blade
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    coupon_name: coupon_name
+                },
+                url: "{{ url('/applycoupon') }}",
+                success: function(data) {
+                    calculatedCouponAmount();
+                    $('#applyCouponField').hide();
+
+                    //Sweet Alert message after remove from the mini cart
+                    const sweetAlert = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        sweetAlert.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data
+                                .success //success message will come from CartControler RemoveFromMiniCart method json return
+                        })
+                    } else {
+                        sweetAlert.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data
+                                .error
+                        });
+                    }
+                    //End sweetalert message.
+
+                }
+
+            })
+        }
+
+        //CALCULATED COUPON AMOUNT////
+        function calculatedCouponAmount() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/calculated/coupon/amount') }}",
+                dataType: 'json',
+                success: function(data) {
+                    //data.total comes from CartController CalculatingCouponAmount method.
+                    //This block for without coupon
+                    if (data.total) {
+                        //thid id #couponAmount from mycart_view 
+                        $('#couponAmount').html(
+                            `<tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        Subtotal<span class="inner-left-md">${data.total}</span>
+                                    </div>
+                                    <div class="cart-grand-total">
+                                        Grand Total<span class="inner-left-md">${data.total}</span>
+                                    </div>
+                                </th>
+                            </tr>`
+
+                        )
+
+
+                    } else {
+                        //This block for witho coupon
+                        //data.subtotal comes from CartController CalculatingCouponAmount method.
+                        $('#couponAmount').html(
+                            `<tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        Subtotal:<span class="inner-left-md">${data.subtotal}</span>
+                                    </div>
+
+                                    <div class="cart-sub-total">
+                                        Coupon name:<span class="inner-left-md">${data.coupon_name}</span>
+                                        <button type="submit" onClick="removeCoupon()"><i class="fa fa-times"></i></button>
+                                    </div>
+
+                                    <div class="cart-sub-total">
+                                        Coupon Discount:<span class="inner-left-md">${data.coupon_discount}</span>
+                                    </div>
+
+                                    <div class="cart-sub-total">
+                                        Discount:<span class="inner-left-md">${data.discount_amount}</span>
+                                    </div>
+
+                                    <div class="cart-grand-total">
+                                        Grand Total:<span class="inner-left-md">${data.total_amount}</span>
+                                    </div>
+                                </th>
+                            </tr>`
+
+                        )
+
+                    }
+
+                }
+            });
+        }
+
+        calculatedCouponAmount();
+    </script>
+
+    <!--APPLY COUPON END -->
+
+    <!--START REMOVE COUPON-->
+    <script type="text/javascript">
+        function removeCoupon() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/remove/coupon') }}",
+                dataType: 'json',
+                success: function(data) {
+                    calculatedCouponAmount(); //for without loading the page coupon will remove.
+                    $('#applyCouponField').show(); //This will show the coupon filed
+                    $('#coupon_name').val(''); //after removing the coupon the coupon input field beacme empty.
+                    //Sweet Alert message after remove from the mini cart
+                    const sweetAlert = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        sweetAlert.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data
+                                .success //success message will come from CartControler RemoveCoupon method json return
+                        })
+                    } else {
+                        sweetAlert.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data
+                                .error
+                        });
+                    }
+                    //End sweetalert message.
+
+                }
+            });
+        }
+    </script>
+    <!--END REMOVE COUPON-->
 
 
 </body>

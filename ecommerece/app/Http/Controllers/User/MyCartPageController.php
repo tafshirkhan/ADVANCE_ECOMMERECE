@@ -4,7 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Cupon;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Session;
 
 
 class MyCartPageController extends Controller
@@ -28,6 +30,9 @@ class MyCartPageController extends Controller
 
     public function RemoveMyCartProduct($rowId){
         Cart::remove($rowId);
+        if(Session::has('coupon')){
+            Session::forget();
+        }
         return response()->json(['success'=>'Removed from your cart']);
     }
 
@@ -36,13 +41,36 @@ class MyCartPageController extends Controller
         //from Bumbummn packages
         $row = Cart::get($rowId);
         Cart::update($rowId, $row->qty + 1);
+        //Go to the CartController for understanding the Session part
+        if (Session::has('coupon')) {
+            $coupon_name = Session::get('coupon')['coupon_name'];
+            $coupon = Cupon::where('coupon_name',$coupon_name)->first();
 
+            Session::put('coupon',[
+                'coupon_name'=> $coupon->coupon_name,
+                'coupon_discount'=> $coupon->coupon_discount,
+                'discount_amount'=> round(Cart::total() * $coupon->coupon_discount/100),
+                'total_amount'=> round(Cart::total() - Cart::total() * $coupon->coupon_discount/100),
+            ]);
+        } 
         return response()->json(['increment']);
     }
 
     public function CartDecrement($rowId){
         $row = Cart::get($rowId);
         Cart::update($rowId, $row->qty - 1);
+
+        if (Session::has('coupon')) {
+            $coupon_name = Session::get('coupon')['coupon_name'];
+            $coupon = Cupon::where('coupon_name',$coupon_name)->first();
+
+            Session::put('coupon',[
+                'coupon_name'=> $coupon->coupon_name,
+                'coupon_discount'=> $coupon->coupon_discount,
+                'discount_amount'=> round(Cart::total() * $coupon->coupon_discount/100),
+                'total_amount'=> round(Cart::total() - Cart::total() * $coupon->coupon_discount/100),
+            ]);
+        } 
 
         return response()->json(['decrement']);
 

@@ -384,9 +384,16 @@ Route::get('/delete/state/{id}',[AreaOfShippingController::class,'DeleteState'])
 //this route is for ajax which is from add addnewstate file for getting the district field automatically whileselect any division
 Route::get('/division/district/ajax/{division_id}',[AreaOfShippingController::class,'GetAllDistrict']);
 
-
 });
 
+////FOR FRONTEND APPLY COUPON////
+Route::post('/applycoupon',[CartController::class,'ApplyCoupon']);
+
+//For calculating coupon amount
+Route::get('/calculated/coupon/amount',[CartController::class,'CalculatingCouponAmount']);
+
+//For removing applied coupon
+Route::get('/remove/coupon',[CartController::class,'RemoveCoupon']);
 
 
 
