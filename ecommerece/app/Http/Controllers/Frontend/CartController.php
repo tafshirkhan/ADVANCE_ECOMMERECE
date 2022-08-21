@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Wishlist;
 use App\Models\Cupon;
+use App\Models\AreaOfShipping;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Auth;
 use Carbon\Carbon;
@@ -147,6 +148,41 @@ class CartController extends Controller
     public function RemoveCoupon(){
         Session::forget('coupon');
         return response()->json(['success'=>'Coupon has been removed']);
+
+    }
+
+    //CHECKOUT 
+    public function CreateCheckout(){
+        //Without login into the system user cannot proceed to checkout page
+        if(Auth::check()){
+            if(Cart::total() > 0){
+                $minicarts = Cart::content(); //his method will return a Collection of CartItems.
+                $minicartQty = Cart::count(); //This method will return the total number of items in the cart.
+                $minicartTotal = Cart::subtotal(); //method can be used to get the total of all items in the cart, minus the total amount of tax,method can be used to get the calculated total of all items in the cart, given there price and quantity.
+                $division = AreaOfShipping::orderBy('division_name','ASC')->get();
+               
+                return view('Frontend.Checkout.checkoutview',compact('minicarts','minicartQty','minicartTotal','division'));
+
+            }else{
+                //when the cart will empty user will redirect to the home page if user click to the proceed to checkout button
+                $notification = array(
+                'message'=>"Please add some profuct first",
+                'alert-type'=>'warning'
+            );
+
+            return redirect()->to('/')->with($notification);
+
+            }
+
+        }else{
+            $notification = array(
+                'message'=>"You must login in",
+                'alert-type'=>'warning'
+            );
+
+            return redirect()->route('login')->with($notification);
+        }
+
 
     }
 }

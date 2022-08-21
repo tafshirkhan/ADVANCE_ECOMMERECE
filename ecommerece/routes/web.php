@@ -17,6 +17,8 @@ use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\MyCartPageController;
 use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\AreaOfShippingController;
+use App\Http\Controllers\User\CheckoutController;
+
 
 
 
@@ -395,7 +397,17 @@ Route::get('/calculated/coupon/amount',[CartController::class,'CalculatingCoupon
 //For removing applied coupon
 Route::get('/remove/coupon',[CartController::class,'RemoveCoupon']);
 
+//CHECKOUT OPTION ROUTE//
+Route::get('/checkout',[CartController::class,'CreateCheckout'])->name('checkout');
 
+//FOR GETTING ALL THE DISTRICT WHILE SELECTS ANY DIVISION
+Route::get('/getalldistrict/ajax/{division_id}',[CheckoutController::class,'GetAllTheDistrict']);
+
+//FOR GETTING ALL THE STATE WHILE SELECTS ANY DISTRICT
+Route::get('/district/getallstate/ajax/{district_id}',[CheckoutController::class,'GetAllTheState']);
+
+//STORE THE CHECKOUT INFORMATION
+Route::post('/checkout/store',[CheckoutController::class,'StoreCheckoutInformation'])->name('checkoutstore');
 
 
 

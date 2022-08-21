@@ -107,30 +107,29 @@
 
     </div>
 
-
     <script type="text/javascript">
         $(document).ready(function() {
             $('select[name="division_id"]').on('change', function() {
                 var division_id = $(this).val();
                 if (division_id) {
                     $.ajax({
-                        url: "{{ url('/division/district/ajax') }}/" + division_id,
+                        url: "{{ url('/getalldistrict/ajax') }}/" + division_id,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
+
                             var d = $('select[name="district_id"]').empty();
                             $.each(data, function(key, value) {
                                 $('select[name="district_id"]').append(
                                     '<option value="' + value.id + '">' + value
-                                    .district_name + '</option>'
-                                );
+                                    .district_name + '</option>');
                             });
                         },
                     });
                 } else {
                     alert('danger');
                 }
-            })
+            }); /* Division & District end */
         });
     </script>
 @endsection
