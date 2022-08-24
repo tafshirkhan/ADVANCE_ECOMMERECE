@@ -238,8 +238,8 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="">Mobile</label>
-                                        <input type="radio" name="payment_method" value="mobile">
+                                        <label for="">Stripe</label>
+                                        <input type="radio" name="payment_method" value="stripe">
 
                                     </div>
 

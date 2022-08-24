@@ -18,6 +18,7 @@ use App\Http\Controllers\User\MyCartPageController;
 use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\AreaOfShippingController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
 
 
 
@@ -277,6 +278,9 @@ function(){
 
     //Remove product from the Wishlist
     Route::get('/wishlist/remove_product/{id}', [WishlistController::class,'RemoveWishlistProduct']);  
+
+    //Stripe payment
+    Route::post('/stripe/payment',[StripeController::class,'StripPaymentOrder'])->name('stripe-payment');
 });
 
 ///////MY CART ALL ROUTES ///////

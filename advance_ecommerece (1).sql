@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2022 at 07:21 AM
+-- Generation Time: Aug 24, 2022 at 12:52 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -46,6 +46,52 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin@gmail.com', '2022-06-01 12:36:47', '$2y$10$HbqB8chXRtpC5H7i4XzWXetEpD216cxk1063AcABgW8n9mAEkO/2K', 'JVWkAKgjEtBeVPH4sr1sSy3cIaanHoRdGblMFkGVHfrytkTvJjI450ApPW5U', NULL, '202206041841images.jpg', '2022-06-01 12:36:47', '2022-06-04 13:13:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `area_of_districts`
+--
+
+CREATE TABLE `area_of_districts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `division_id` bigint(20) UNSIGNED NOT NULL,
+  `district_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `area_of_districts`
+--
+
+INSERT INTO `area_of_districts` (`id`, `division_id`, `district_name`, `created_at`, `updated_at`) VALUES
+(2, 3, 'GAZIPUR', '2022-08-14 00:13:35', '2022-08-14 00:13:35'),
+(5, 3, 'UTTARA', '2022-08-15 22:52:00', NULL),
+(6, 2, 'HABIGANJ', '2022-08-15 23:31:31', NULL),
+(7, 2, 'MOULVIBAZAR', '2022-08-15 23:31:41', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `area_of_shippings`
+--
+
+CREATE TABLE `area_of_shippings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `division_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `area_of_shippings`
+--
+
+INSERT INTO `area_of_shippings` (`id`, `division_name`, `created_at`, `updated_at`) VALUES
+(2, 'SYLHET', '2022-08-13 22:56:23', NULL),
+(3, 'DHAKA', '2022-08-13 23:37:06', NULL),
+(4, 'KHULNA', '2022-08-15 22:33:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -171,7 +217,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2022_06_28_174002_create_multi_images_table', 8),
 (15, '2022_07_06_174207_create_sliders_table', 9),
 (16, '2022_08_06_091532_create_wishlists_table', 10),
-(17, '2022_08_12_040507_create_cupons_table', 11);
+(17, '2022_08_12_040507_create_cupons_table', 11),
+(18, '2022_08_14_042036_create_area_of_shippings_table', 12),
+(19, '2022_08_14_050706_create_area_of_districts_table', 13),
+(20, '2022_08_16_043723_create_shipping_states_table', 14),
+(21, '2022_08_21_080041_create_shippings_table', 15),
+(22, '2022_08_24_102704_create_orders_table', 16),
+(23, '2022_08_24_102811_create_order_items_table', 16);
 
 -- --------------------------------------------------------
 
@@ -199,6 +251,64 @@ INSERT INTO `multi_images` (`id`, `product_id`, `photo_name`, `created_at`, `upd
 (9, 4, 'upload/product/multiImage/1737808656351353.jpg', '2022-07-08 12:04:42', NULL),
 (10, 5, 'upload/product/multiImage/1737808882609122.jpg', '2022-07-08 12:08:18', NULL),
 (11, 5, 'upload/product/multiImage/1737808882680117.jpg', '2022-07-08 12:08:18', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `division_id` bigint(20) UNSIGNED NOT NULL,
+  `district_id` bigint(20) UNSIGNED NOT NULL,
+  `state_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_code` int(11) DEFAULT NULL,
+  `notes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `transaction_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `currency` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` double(8,2) NOT NULL,
+  `order_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `invoice_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_month` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_year` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `confirmed_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `processing_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `picked_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipped_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deliverd_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cancel_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return_reason` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -293,8 +403,29 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('8mvTTnrF4cFOStDTum8822RSrN5NXLjoil0Lwq6b', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMXFIWUpLaFF5cXluYTFhWk1vNkYzMGxTdzNUaG4wZ1FtN0dwMndreiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jdXBvbi9hbGwvY291cG9ucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE5OiJwYXNzd29yZF9oYXNoX2FkbWluIjtzOjYwOiIkMnkkMTAkSGJxQjhjaFhSdHBDNUg3aTRYeldYZXRFcEQyMTZjeGsxMDYzQWNBQmdXOG45bUFFa08vMksiO30=', 1660281610),
-('lqX4TBswuXuinimosHcPGtZCiUntZwHTCbT6pJZY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT3R3cHR5QlVpRnVvTEh4bDdOdDh1RDRHd3JrUUJYMkhFZERCRGlPQyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1660210757);
+('WmEMagAdSasXtLppe4JFipBYbTKW7v90H1gXpfHS', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWk4xeFlmdjB3cmZRbWJaMlVhSkhQdktvTUM5UFJjaVFKYjlodml1ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jaGVja291dCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHkwaHBIUUpTQnBwRDQwQ05NU3ZYMy52eElJRHl3RXlINjZ4d243aWxJYnNYL3pvVy5wbXM2IjtzOjQ6ImNhcnQiO2E6MTp7czo3OiJkZWZhdWx0IjtPOjI5OiJJbGx1bWluYXRlXFN1cHBvcnRcQ29sbGVjdGlvbiI6Mjp7czo4OiIAKgBpdGVtcyI7YToxOntzOjMyOiI3NTQzZGI1MjVmNGFhOTVjZDJjNjFiM2JmNjdkOGM5OCI7TzozMjoiR2xvdWRlbWFuc1xTaG9wcGluZ2NhcnRcQ2FydEl0ZW0iOjExOntzOjU6InJvd0lkIjtzOjMyOiI3NTQzZGI1MjVmNGFhOTVjZDJjNjFiM2JmNjdkOGM5OCI7czoyOiJpZCI7czoxOiI0IjtzOjM6InF0eSI7czoxOiIxIjtzOjQ6Im5hbWUiO3M6MTk6IlNhbXN1bmcgR2FsYXh5IEJvb2siO3M6NToicHJpY2UiO2Q6NzkwMDA7czo2OiJ3ZWlnaHQiO2Q6MTtzOjc6Im9wdGlvbnMiO086Mzk6Ikdsb3VkZW1hbnNcU2hvcHBpbmdjYXJ0XENhcnRJdGVtT3B0aW9ucyI6Mjp7czo4OiIAKgBpdGVtcyI7YTozOntzOjU6ImltYWdlIjtzOjQ2OiJ1cGxvYWQvcHJvZHVjdC90aHVtYkltYWdlLzE3Mzc4MDg2NTYxOTAwNjguanBnIjtzOjU6ImNvbG9yIjtzOjU6ImJsYWNrIjtzOjQ6InNpemUiO3M6MzoiMTMiIjt9czoyODoiACoAZXNjYXBlV2hlbkNhc3RpbmdUb1N0cmluZyI7YjowO31zOjc6InRheFJhdGUiO2k6MDtzOjQ5OiIAR2xvdWRlbWFuc1xTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AYXNzb2NpYXRlZE1vZGVsIjtOO3M6NDY6IgBHbG91ZGVtYW5zXFNob3BwaW5nY2FydFxDYXJ0SXRlbQBkaXNjb3VudFJhdGUiO2k6MDtzOjg6Imluc3RhbmNlIjtzOjc6ImRlZmF1bHQiO319czoyODoiACoAZXNjYXBlV2hlbkNhc3RpbmdUb1N0cmluZyI7YjowO319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1661336122);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_states`
+--
+
+CREATE TABLE `shipping_states` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `division_id` bigint(20) UNSIGNED NOT NULL,
+  `district_id` bigint(20) UNSIGNED NOT NULL,
+  `state_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `shipping_states`
+--
+
+INSERT INTO `shipping_states` (`id`, `division_id`, `district_id`, `state_name`, `created_at`, `updated_at`) VALUES
+(1, 3, 5, 'SECTOR - 8', '2022-08-15 23:40:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -528,7 +659,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
 (1, 'User', 'user1@gmail.com', '01700000000', NULL, '$2y$10$.BNtkJfD3rRrF492tXdzmeYUjTJGd8S63kIx2VmSjtvdIGNV5XNLa', NULL, NULL, NULL, NULL, NULL, '202206091703images (1).jpg', '2022-06-01 12:15:45', '2022-06-09 11:03:37'),
-(2, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', NULL, '$2y$10$y0hpHQJSBppD40CNMSvX3.vxIIDywEyH66xwn7ilIbsX/zoW.pms6', NULL, NULL, NULL, 'vM7GNH4yciVbfhZ5YfGdBsvS0lzw4QVqQjh0eSz1UvrK15fL4T3r2UY5tq0J', NULL, '202206071800images (1).jpg', '2022-06-06 12:48:01', '2022-06-07 12:03:56');
+(2, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', NULL, '$2y$10$y0hpHQJSBppD40CNMSvX3.vxIIDywEyH66xwn7ilIbsX/zoW.pms6', NULL, NULL, NULL, 'DY8XaKPEwsAi4Xv7y6AelptvrGGtW1dT9s9VXAnps3mLEQ2rhlld5JQxGgZ7', NULL, '202206071800images (1).jpg', '2022-06-06 12:48:01', '2022-06-07 12:03:56');
 
 -- --------------------------------------------------------
 
@@ -554,6 +685,18 @@ CREATE TABLE `wishlists` (
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `admins_email_unique` (`email`);
+
+--
+-- Indexes for table `area_of_districts`
+--
+ALTER TABLE `area_of_districts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `area_of_shippings`
+--
+ALTER TABLE `area_of_shippings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `brands`
@@ -593,6 +736,19 @@ ALTER TABLE `multi_images`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_items_order_id_foreign` (`order_id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -619,6 +775,12 @@ ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `sessions_user_id_index` (`user_id`),
   ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `shipping_states`
+--
+ALTER TABLE `shipping_states`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sliders`
@@ -662,6 +824,18 @@ ALTER TABLE `admins`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `area_of_districts`
+--
+ALTER TABLE `area_of_districts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `area_of_shippings`
+--
+ALTER TABLE `area_of_shippings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
@@ -689,13 +863,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `multi_images`
 --
 ALTER TABLE `multi_images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -708,6 +894,12 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `shipping_states`
+--
+ALTER TABLE `shipping_states`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sliders`
@@ -738,6 +930,16 @@ ALTER TABLE `users`
 --
 ALTER TABLE `wishlists`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

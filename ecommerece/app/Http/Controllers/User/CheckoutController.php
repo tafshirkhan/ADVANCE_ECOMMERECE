@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AreaOfShipping;
 use App\Models\AreaOfDistrict;
 use App\Models\ShippingState;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CheckoutController extends Controller
 {
@@ -35,10 +36,11 @@ class CheckoutController extends Controller
         $data['district_id'] = $req->district_id;
         $data['state_id'] = $req->state_id;
         $data['notes'] = $req->notes;
+        $cartTotal = Cart::total();
 
 
-        if($req->payment_method == 'mobile'){
-            return view('Frontend.Payment.mobile',compact('data'));
+        if($req->payment_method == 'stripe'){
+            return view('Frontend.Payment.stripe',compact('data','cartTotal'));
         }
         else if($req->payment_method == 'card'){
             return 'card';
