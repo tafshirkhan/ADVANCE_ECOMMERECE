@@ -19,8 +19,8 @@ class CreateOrderItemsTable extends Migration
             //when any specific order_id will cancel or deleted then all the order related items will delete from order_items
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
-            $table->string('color');
-            $table->string('size');
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->string('qty');
             $table->float('price',8,2);
             $table->timestamps();

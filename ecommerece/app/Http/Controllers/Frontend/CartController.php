@@ -168,9 +168,9 @@ class CartController extends Controller
                 $notification = array(
                 'message'=>"Please add some profuct first",
                 'alert-type'=>'warning'
-            );
+                );
 
-            return redirect()->to('/')->with($notification);
+                return redirect()->to('/')->with($notification);
 
             }
 
