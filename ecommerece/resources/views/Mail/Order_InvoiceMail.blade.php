@@ -64,7 +64,7 @@
                                             Hello!</h1>
                                         <p
                                             style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
-                                            Email for receving your product</p>
+                                            You are receiving this email regarding your resort reservation.</p>
                                         <table class="action" align="center" width="100%" cellpadding="0"
                                             cellspacing="0" role="presentation"
                                             style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; margin: 30px auto; padding: 0; text-align: center; width: 100%;">
@@ -85,7 +85,22 @@
                                                                             style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
 
                                                                         </td>
+                                                                        <td>Username: {{ $order['name'] }}</td>
+                                                                        <br>
+                                                                        <td>Invoice No: {{ $order['invoice_no'] }}</td>
+                                                                        <br>
+                                                                        <td>Amount: {{ $order['amount'] }}</td>
+                                                                        <br>
+                                                                        <td>Phone: {{ $order['phone'] }}</td>
+                                                                        <br>
+                                                                        <td>Email: {{ $order['email'] }}</td>
+                                                                        <br>
+                                                                        <td>District: {{ $order['district'] }}</td>
+                                                                        <br>
+                                                                        <td>State: {{ $order['state'] }}</td>
                                                                     </tr>
+
+
                                                                 </table>
                                                             </td>
                                                         </tr>
@@ -93,6 +108,11 @@
                                                 </td>
                                             </tr>
                                         </table>
+
+
+
+
+
 
                                     </td>
                                 </tr>

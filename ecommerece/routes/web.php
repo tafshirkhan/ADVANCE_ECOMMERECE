@@ -277,11 +277,11 @@ function(){
     Route::get('/get/wishlist_product', [WishlistController::class,'GetWishlistProduct']);
 
     //Remove product from the Wishlist
-    Route::get('/wishlist/remove_product/{id}', [WishlistController::class,'RemoveWishlistProduct']);  
-
+    Route::get('/wishlist/remove_product/{id}', [WishlistController::class,'RemoveWishlistProduct']); 
     //Stripe payment
-    Route::post('/stripe/payment',[StripeController::class,'StripPaymentOrder'])->name('stripe-payment');
+    Route::post('/stripe/payment', [StripeController::class,'StripePaymentOrder'])->name('stripe.payment');
 });
+
 
 ///////MY CART ALL ROUTES ///////
 //My Cart

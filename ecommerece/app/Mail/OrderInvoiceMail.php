@@ -31,6 +31,6 @@ class OrderInvoiceMail extends Mailable
     public function build()
     {
         $order = $this->data; //accessing all the data
-        return $this->from('khantafshir1997@gmail.com')->view('Mail.OrderInvoiceMail',compact('order'))->subject('Email From Ecommerece');
+        return $this->from('khantafshir1997@gmail.com')->view('Mail.Order_InvoiceMail',compact('order'))->subject('Email From Ecommerece');
     }
 }

@@ -106,7 +106,7 @@ class CartController extends Controller
 
     //APPLY COUPON//
     public function ApplyCoupon(Request $req){
-        //$req->coupon_name comes from mycart_view input field which is passing through the daat from the master.blade
+        //$req->coupon_name comes from mycart_view input field which is passing through the data from the master.blade
         $coupon = Cupon::where('coupon_name',$req->coupon_name)->where('coupon_validity','>=',Carbon::now()->format('Y-m-d'))->first();
         if($coupon){
             Session::put('coupon',[
@@ -117,6 +117,7 @@ class CartController extends Controller
             ]);
 
             return response()->json(array(
+                'validity' => true,
                 'success'=>'Coupon redeem successful'
             ));
         }else{

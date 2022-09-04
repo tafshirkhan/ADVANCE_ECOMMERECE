@@ -65,7 +65,7 @@
                                     <h4 class="unicase-checkout-title">Payment Method</h4>
                                 </div>
 
-                                <form action="{{ route('stripe-payment') }}" method="POST" id="payment-form">
+                                <form action="{{ route('stripe.payment') }}" method="POST" id="payment-form">
                                     @csrf
                                     <div class="form-row">
                                         <!-- All the input fields value comes from CheckoutController StoreCheckoutInformation method -->

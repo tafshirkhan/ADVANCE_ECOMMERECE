@@ -747,7 +747,9 @@
                 url: "{{ url('/applycoupon') }}",
                 success: function(data) {
                     calculatedCouponAmount();
-                    $('#applyCouponField').hide();
+                    if (data.validity == true) { //validty from CartController ApplyCoupon method
+                        $('#applyCouponField').hide();
+                    }
 
                     //Sweet Alert message after remove from the mini cart
                     const sweetAlert = Swal.mixin({
