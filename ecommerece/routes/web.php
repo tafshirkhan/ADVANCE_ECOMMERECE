@@ -19,9 +19,8 @@ use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\AreaOfShippingController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
-
-
-
+use App\Http\Controllers\User\CashonController;
+use App\Http\Controllers\User\AllUserController;
 
 
 
@@ -280,6 +279,15 @@ function(){
     Route::get('/wishlist/remove_product/{id}', [WishlistController::class,'RemoveWishlistProduct']); 
     //Stripe payment
     Route::post('/stripe/payment', [StripeController::class,'StripePaymentOrder'])->name('stripe.payment');
+    //Order placed
+    Route::get('/order/placed', [AllUserController::class,'PlacedOrders'])->name('order.placed'); 
+    //view order details
+    Route::get('/order_details/{order_id}', [AllUserController::class,'OrderDetails']); 
+
+    //Cash payment
+    Route::post('/cash/payment', [CashonController::class,'CashonPaymentOrder'])->name('cash.payment');
+
+
 });
 
 
