@@ -286,7 +286,9 @@ function(){
 
     //Cash payment
     Route::post('/cash/payment', [CashonController::class,'CashonPaymentOrder'])->name('cash.payment');
-
+    
+    //Download Invoice
+    Route::get('/download_invoice/{order_id}',[AllUserController::class, 'DownloadInvoice']);
 
 });
 

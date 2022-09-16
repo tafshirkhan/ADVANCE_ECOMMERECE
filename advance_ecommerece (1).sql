@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2022 at 12:52 PM
+-- Generation Time: Sep 16, 2022 at 12:09 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -45,7 +45,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '2022-06-01 12:36:47', '$2y$10$HbqB8chXRtpC5H7i4XzWXetEpD216cxk1063AcABgW8n9mAEkO/2K', 'JVWkAKgjEtBeVPH4sr1sSy3cIaanHoRdGblMFkGVHfrytkTvJjI450ApPW5U', NULL, '202206041841images.jpg', '2022-06-01 12:36:47', '2022-06-04 13:13:33');
+(1, 'Admin', 'admin@gmail.com', '2022-06-01 12:36:47', '$2y$10$HbqB8chXRtpC5H7i4XzWXetEpD216cxk1063AcABgW8n9mAEkO/2K', '4dFjHrGxsEAG9C82pVedtjJIjXn9JHlozo4WwZNne4LZRSf7KwZsMmGefy4A', NULL, '202206041841images.jpg', '2022-06-01 12:36:47', '2022-06-04 13:13:33');
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,16 @@ INSERT INTO `area_of_districts` (`id`, `division_id`, `district_name`, `created_
 (2, 3, 'GAZIPUR', '2022-08-14 00:13:35', '2022-08-14 00:13:35'),
 (5, 3, 'UTTARA', '2022-08-15 22:52:00', NULL),
 (6, 2, 'HABIGANJ', '2022-08-15 23:31:31', NULL),
-(7, 2, 'MOULVIBAZAR', '2022-08-15 23:31:41', NULL);
+(7, 2, 'MOULVIBAZAR', '2022-08-15 23:31:41', NULL),
+(8, 3, 'SECTOR-9', '2022-09-16 02:54:37', NULL),
+(9, 3, 'SECTOR-1', '2022-09-16 02:54:48', NULL),
+(10, 3, 'SECTOR-2', '2022-09-16 02:54:55', NULL),
+(11, 3, 'SECTOR-3', '2022-09-16 02:55:02', NULL),
+(12, 3, 'SECTOR-4', '2022-09-16 02:55:10', NULL),
+(13, 3, 'SECTOR-5', '2022-09-16 02:55:17', NULL),
+(14, 2, 'SHUNAMGONJ', '2022-09-16 02:55:39', NULL),
+(15, 2, 'TAHERPUR', '2022-09-16 02:55:51', NULL),
+(16, 2, 'HABIGANJ', '2022-09-16 02:55:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -166,7 +175,7 @@ CREATE TABLE `cupons` (
 --
 
 INSERT INTO `cupons` (`id`, `coupon_name`, `coupon_discount`, `coupon_validity`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'HEART-ATTACK', 30, '2022-08-24', 1, '2022-08-11 23:17:13', '2022-08-11 23:17:13');
+(1, 'HEART-ATTACK', 30, '2022-08-26', 1, '2022-08-25 04:06:39', '2022-08-25 04:06:39');
 
 -- --------------------------------------------------------
 
@@ -271,10 +280,10 @@ CREATE TABLE `orders` (
   `notes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `payment_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `transaction_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transaction_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `currency` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` double(8,2) NOT NULL,
-  `order_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `invoice_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `order_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `order_month` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -292,6 +301,24 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `division_id`, `district_id`, `state_id`, `name`, `email`, `phone`, `post_code`, `notes`, `payment_type`, `payment_method`, `transaction_id`, `currency`, `amount`, `order_number`, `invoice_no`, `order_date`, `order_month`, `order_year`, `confirmed_date`, `processing_date`, `picked_date`, `shipped_date`, `deliverd_date`, `cancel_date`, `return_date`, `return_reason`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'TESTING 1', 'card_1LacckD1QbGk12MCBghHLxYq', 'Stripe', 'txn_3LacclD1QbGk12MC1gLluqp3', 'usd', 79000.00, '630744adb1961', 'HAPPY_SHOPPING98340797', '25 August 2022', 'August 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-08-25 03:45:19', NULL),
+(2, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'TESTING 1', 'card_1LaciPD1QbGk12MCpkB1S7H0', 'Stripe', 'txn_3LaciQD1QbGk12MC05tnRQGA', 'usd', 79000.00, '6307460cbcfa0', 'HAPPY_SHOPPING40933888', '25 August 2022', 'August 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-08-25 03:51:10', NULL),
+(3, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'TESTING-2', 'card_1LaczaD1QbGk12MCygDLouwM', 'Stripe', 'txn_3LaczbD1QbGk12MC1CXiH8M6', 'usd', 280.00, '63074a36e9d4f', 'HAPPY_SHOPPING51187727', '25 August 2022', 'August 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-08-25 04:08:57', NULL),
+(4, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'Testing 1', 'card_1Ld90uD1QbGk12MC2EKD25vn', 'Stripe', 'txn_3Ld90vD1QbGk12MC0SyJiYpB', 'usd', 800.00, '631070f9cb3fa', 'HAPPY_SHOPPING57066244', '01 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-01 02:44:44', NULL),
+(5, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'aaaaaaaaaa', 'card_1Ld94fD1QbGk12MCWb3nDz0m', 'Stripe', 'txn_3Ld94hD1QbGk12MC0YnPIsSQ', 'usd', 800.00, '631071e32fea5', 'HAPPY_SHOPPING32630014', '01 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-01 02:48:36', NULL),
+(6, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'testing', 'card_1Ld9BZD1QbGk12MCmCvL5W16', 'Stripe', 'txn_3Ld9BbD1QbGk12MC0myYakoI', 'usd', 800.00, '6310738f3a9ce', 'HAPPY_SHOPPING62663976', '01 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-01 02:55:45', NULL),
+(7, 2, 3, 5, 1, 'khantafshir1997@gmail.com', 'khantafshir1997@gmail.com', '01792288714', 1229, 'testing', 'card_1LeBr1D1QbGk12MCC5G0ssFP', 'Stripe', 'txn_3LeBr3D1QbGk12MC1h1ap4z4', 'usd', 158000.00, '63143e9883ea4', 'HAPPY_SHOPPING91023901', '04 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-03 23:58:51', NULL),
+(8, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1234, 'aaaaaaaa', 'card_1LeBvTD1QbGk12MCMAB62d9K', 'Stripe', 'txn_3LeBvUD1QbGk12MC1JSfZ6Ll', 'usd', 158000.00, '63143fac8f919', 'HAPPY_SHOPPING28299037', '04 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-04 00:03:26', NULL),
+(9, 3, 3, 5, 1, 'Ahmed', 'ahmed100@gmail.cpm', '01234567892', 1111, 'Ahmed', 'card_1LeC25D1QbGk12MCeOffnlQS', 'Stripe', 'txn_3LeC26D1QbGk12MC1F93RjN0', 'usd', 79000.00, '63144146215ac', 'HAPPY_SHOPPING40937038', '04 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-04 00:10:15', NULL),
+(10, 1, 3, 5, 1, 'User', 'user1@gmail.com', '01700000000', 1111, 'User 1', 'card_1LiDGJD1QbGk12MCXMvvB0BK', 'Stripe', 'txn_3LiDGLD1QbGk12MC1sfoqUoJ', 'usd', 800.00, '6322df9ce0e26', 'HAPPY_SHOPPING12781364', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-15 02:17:36', NULL),
+(11, 1, 3, 5, 1, 'Tafshir', 'user1@gmail.com', '01700000000', 2222, 'Tafshir 1', 'card_1LiDKKD1QbGk12MCYuSNkSHd', 'Stripe', 'txn_3LiDKLD1QbGk12MC0sCP9Ulr', 'usd', 79000.00, '6322e09556e5a', 'HAPPY_SHOPPING80511000', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-15 02:21:43', NULL),
+(12, 1, 3, 5, 1, 'User', 'user1@gmail.com', '01700000000', 11111, 'AAAAAA', 'Casn-on', 'Cash-on', NULL, 'TK', 79000.00, NULL, 'HAPPY_SHOPPING21794507', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-15 03:50:20', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -302,13 +329,25 @@ CREATE TABLE `order_items` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `order_id` bigint(20) UNSIGNED NOT NULL,
   `product_id` bigint(20) UNSIGNED NOT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `qty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `color`, `size`, `qty`, `price`, `created_at`, `updated_at`) VALUES
+(1, 2, 4, 'black', '13\"', '1', 79000.00, '2022-08-25 03:51:10', NULL),
+(2, 3, 1, 'black', '5v', '1', 400.00, '2022-08-25 04:08:57', NULL),
+(3, 9, 4, 'black', '13\"', '1', 79000.00, '2022-09-04 00:10:15', NULL),
+(4, 10, 1, 'black', '5v', '2', 400.00, '2022-09-15 02:17:36', NULL),
+(5, 11, 4, 'black', '13\"', '1', 79000.00, '2022-09-15 02:21:43', NULL),
+(6, 12, 4, 'black', '13\"', '1', 79000.00, '2022-09-15 03:50:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -321,6 +360,13 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('user1@gmail.com', '$2y$10$ceylqnlZ0oTWrwAXLbsD1.VhJDfQjqQHYIGmJeUTDQTnQhRHAYuBu', '2022-08-25 04:44:45');
 
 -- --------------------------------------------------------
 
@@ -403,7 +449,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('WmEMagAdSasXtLppe4JFipBYbTKW7v90H1gXpfHS', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWk4xeFlmdjB3cmZRbWJaMlVhSkhQdktvTUM5UFJjaVFKYjlodml1ZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jaGVja291dCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHkwaHBIUUpTQnBwRDQwQ05NU3ZYMy52eElJRHl3RXlINjZ4d243aWxJYnNYL3pvVy5wbXM2IjtzOjQ6ImNhcnQiO2E6MTp7czo3OiJkZWZhdWx0IjtPOjI5OiJJbGx1bWluYXRlXFN1cHBvcnRcQ29sbGVjdGlvbiI6Mjp7czo4OiIAKgBpdGVtcyI7YToxOntzOjMyOiI3NTQzZGI1MjVmNGFhOTVjZDJjNjFiM2JmNjdkOGM5OCI7TzozMjoiR2xvdWRlbWFuc1xTaG9wcGluZ2NhcnRcQ2FydEl0ZW0iOjExOntzOjU6InJvd0lkIjtzOjMyOiI3NTQzZGI1MjVmNGFhOTVjZDJjNjFiM2JmNjdkOGM5OCI7czoyOiJpZCI7czoxOiI0IjtzOjM6InF0eSI7czoxOiIxIjtzOjQ6Im5hbWUiO3M6MTk6IlNhbXN1bmcgR2FsYXh5IEJvb2siO3M6NToicHJpY2UiO2Q6NzkwMDA7czo2OiJ3ZWlnaHQiO2Q6MTtzOjc6Im9wdGlvbnMiO086Mzk6Ikdsb3VkZW1hbnNcU2hvcHBpbmdjYXJ0XENhcnRJdGVtT3B0aW9ucyI6Mjp7czo4OiIAKgBpdGVtcyI7YTozOntzOjU6ImltYWdlIjtzOjQ2OiJ1cGxvYWQvcHJvZHVjdC90aHVtYkltYWdlLzE3Mzc4MDg2NTYxOTAwNjguanBnIjtzOjU6ImNvbG9yIjtzOjU6ImJsYWNrIjtzOjQ6InNpemUiO3M6MzoiMTMiIjt9czoyODoiACoAZXNjYXBlV2hlbkNhc3RpbmdUb1N0cmluZyI7YjowO31zOjc6InRheFJhdGUiO2k6MDtzOjQ5OiIAR2xvdWRlbWFuc1xTaG9wcGluZ2NhcnRcQ2FydEl0ZW0AYXNzb2NpYXRlZE1vZGVsIjtOO3M6NDY6IgBHbG91ZGVtYW5zXFNob3BwaW5nY2FydFxDYXJ0SXRlbQBkaXNjb3VudFJhdGUiO2k6MDtzOjg6Imluc3RhbmNlIjtzOjc6ImRlZmF1bHQiO319czoyODoiACoAZXNjYXBlV2hlbkNhc3RpbmdUb1N0cmluZyI7YjowO319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1661336122);
+('gSGjmnVKrBfr7keOgLlZlX8lqbMiRFSPMLzRItgx', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiOEk3aXRpcUMySHpZb1hUcWlwcGxBcVpuVjlaR3VNN2w2dFc5eUx0byI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyL2Rvd25sb2FkX2ludm9pY2UvMTAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxOToicGFzc3dvcmRfaGFzaF9hZG1pbiI7czo2MDoiJDJ5JDEwJEhicUI4Y2hYUnRwQzVIN2k0WHpXWGV0RXBEMjE2Y3hrMTA2M0FjQUJnVzhuOW1BRWtPLzJLIjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJC5CTnRrSmZEM3JSckY0OTJ0WGR6bWVZVWpUSkdkOFM2M2tJeDJWbVNqdHZkSUdOVjVYTkxhIjt9', 1663322591);
 
 -- --------------------------------------------------------
 
@@ -425,7 +471,11 @@ CREATE TABLE `shipping_states` (
 --
 
 INSERT INTO `shipping_states` (`id`, `division_id`, `district_id`, `state_name`, `created_at`, `updated_at`) VALUES
-(1, 3, 5, 'SECTOR - 8', '2022-08-15 23:40:30', NULL);
+(1, 3, 5, 'SECTOR - 8', '2022-08-15 23:40:30', NULL),
+(3, 3, 2, 'KALIAKAIR', '2022-09-16 02:59:12', NULL),
+(4, 3, 2, 'SRIPUR', '2022-09-16 02:59:34', NULL),
+(5, 2, 7, 'SHRIMANGAL', '2022-09-16 03:00:12', NULL),
+(6, 2, 7, 'KAMALGANJ', '2022-09-16 03:00:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -659,7 +709,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
 (1, 'User', 'user1@gmail.com', '01700000000', NULL, '$2y$10$.BNtkJfD3rRrF492tXdzmeYUjTJGd8S63kIx2VmSjtvdIGNV5XNLa', NULL, NULL, NULL, NULL, NULL, '202206091703images (1).jpg', '2022-06-01 12:15:45', '2022-06-09 11:03:37'),
-(2, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', NULL, '$2y$10$y0hpHQJSBppD40CNMSvX3.vxIIDywEyH66xwn7ilIbsX/zoW.pms6', NULL, NULL, NULL, 'DY8XaKPEwsAi4Xv7y6AelptvrGGtW1dT9s9VXAnps3mLEQ2rhlld5JQxGgZ7', NULL, '202206071800images (1).jpg', '2022-06-06 12:48:01', '2022-06-07 12:03:56');
+(2, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', NULL, '$2y$10$y0hpHQJSBppD40CNMSvX3.vxIIDywEyH66xwn7ilIbsX/zoW.pms6', NULL, NULL, NULL, 'dTRVHEqulgxZAzWIhoq3MatN0uHyBySDR04gn3kRwRRIibvigwM7KpCN7kiL', NULL, '202206071800images (1).jpg', '2022-06-06 12:48:01', '2022-06-07 12:03:56'),
+(3, 'Ahmed', 'ahmed100@gmail.cpm', '01234567892', NULL, '$2y$10$dNzFMqp5O7GDo3mFUk5a/uPEakRQSG7r8bZSOTkWsE6BqaISt5CH6', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-04 00:09:10', '2022-09-04 00:09:10');
 
 -- --------------------------------------------------------
 
@@ -827,7 +878,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `area_of_districts`
 --
 ALTER TABLE `area_of_districts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `area_of_shippings`
@@ -875,13 +926,13 @@ ALTER TABLE `multi_images`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -899,7 +950,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `shipping_states`
 --
 ALTER TABLE `shipping_states`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sliders`
@@ -923,7 +974,7 @@ ALTER TABLE `sub__sub_categories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `wishlists`
