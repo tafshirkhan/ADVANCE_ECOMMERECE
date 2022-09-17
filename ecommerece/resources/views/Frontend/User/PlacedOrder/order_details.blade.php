@@ -167,17 +167,20 @@
                     </div>
                 </div> <!-- End order item row-->
 
+                <!-- Return order row-->
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
 
-
-
-
-
-
-
-
-
-
-
+                    @if ($order->status !== 'delivered')
+                    @else
+                        <div class="form-group col-md-10">
+                            <label for="label">Return Order Reason:</label>
+                            <textarea name="return_reason" id="" class="form-control" cols="20" rows="05">Return reason</textarea>
+                        </div>
+                    @endif
+                </div>
+                <!-- End return order row-->
 
 
 

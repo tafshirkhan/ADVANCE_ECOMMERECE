@@ -21,6 +21,7 @@ use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\CashonController;
 use App\Http\Controllers\User\AllUserController;
+use App\Http\Controllers\Backend\OrderController;
 
 
 
@@ -425,15 +426,33 @@ Route::post('/checkout/store',[CheckoutController::class,'StoreCheckoutInformati
 
 
 
+//Admin manage all orders
+Route::prefix('admin-orders')->group(function(){
+    //All the pending orders
+    Route::get('/pending/orders',[OrderController::class,'PendingOrders'])->name('pending.orders');
+    
+    //Pending order details
+    Route::get('/pendingorder/details/{order_id}',[OrderController::class,'PendingOrderDetails'])->name('pendingorder.details');
+    
+    //Confirm orders
+    Route::get('/confirm/orders',[OrderController::class,'ConfirmOrders'])->name('confirm.orders');
+    
+    //Process orders
+    Route::get('/process/orders',[OrderController::class,'OrdersInProcess'])->name('process.orders');
 
+    //Process orders
+    Route::get('/picked/orders',[OrderController::class,'PickedOrders'])->name('picked.orders');
 
+    //Shipped orders
+    Route::get('/shipped/orders',[OrderController::class,'ShippedOrders'])->name('shipped.orders');
 
+    //Deliverd orders
+    Route::get('/deliverd/orders',[OrderController::class,'DeliverdOrders'])->name('deliverd.orders');
 
+    //Cancel orders
+    Route::get('/cancel/orders',[OrderController::class,'CancelOrders'])->name('cancel.orders');
 
-
-
-
-
+});
 
 
 //admin guard
