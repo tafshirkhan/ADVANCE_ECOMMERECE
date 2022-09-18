@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2022 at 12:09 PM
+-- Generation Time: Sep 18, 2022 at 09:23 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -306,7 +306,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `division_id`, `district_id`, `state_id`, `name`, `email`, `phone`, `post_code`, `notes`, `payment_type`, `payment_method`, `transaction_id`, `currency`, `amount`, `order_number`, `invoice_no`, `order_date`, `order_month`, `order_year`, `confirmed_date`, `processing_date`, `picked_date`, `shipped_date`, `deliverd_date`, `cancel_date`, `return_date`, `return_reason`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'TESTING 1', 'card_1LacckD1QbGk12MCBghHLxYq', 'Stripe', 'txn_3LacclD1QbGk12MC1gLluqp3', 'usd', 79000.00, '630744adb1961', 'HAPPY_SHOPPING98340797', '25 August 2022', 'August 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-08-25 03:45:19', NULL),
+(1, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'TESTING 1', 'card_1LacckD1QbGk12MCBghHLxYq', 'Stripe', 'txn_3LacclD1QbGk12MC1gLluqp3', 'usd', 79000.00, '630744adb1961', 'HAPPY_SHOPPING98340797', '25 August 2022', 'August 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Cancel', '2022-08-25 03:45:19', '2022-09-18 01:02:15'),
 (2, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'TESTING 1', 'card_1LaciPD1QbGk12MCpkB1S7H0', 'Stripe', 'txn_3LaciQD1QbGk12MC05tnRQGA', 'usd', 79000.00, '6307460cbcfa0', 'HAPPY_SHOPPING40933888', '25 August 2022', 'August 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-08-25 03:51:10', NULL),
 (3, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'TESTING-2', 'card_1LaczaD1QbGk12MCygDLouwM', 'Stripe', 'txn_3LaczbD1QbGk12MC1CXiH8M6', 'usd', 280.00, '63074a36e9d4f', 'HAPPY_SHOPPING51187727', '25 August 2022', 'August 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-08-25 04:08:57', NULL),
 (4, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1202, 'Testing 1', 'card_1Ld90uD1QbGk12MC2EKD25vn', 'Stripe', 'txn_3Ld90vD1QbGk12MC0SyJiYpB', 'usd', 800.00, '631070f9cb3fa', 'HAPPY_SHOPPING57066244', '01 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-01 02:44:44', NULL),
@@ -316,8 +316,8 @@ INSERT INTO `orders` (`id`, `user_id`, `division_id`, `district_id`, `state_id`,
 (8, 2, 3, 5, 1, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', 1234, 'aaaaaaaa', 'card_1LeBvTD1QbGk12MCMAB62d9K', 'Stripe', 'txn_3LeBvUD1QbGk12MC1JSfZ6Ll', 'usd', 158000.00, '63143fac8f919', 'HAPPY_SHOPPING28299037', '04 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-04 00:03:26', NULL),
 (9, 3, 3, 5, 1, 'Ahmed', 'ahmed100@gmail.cpm', '01234567892', 1111, 'Ahmed', 'card_1LeC25D1QbGk12MCeOffnlQS', 'Stripe', 'txn_3LeC26D1QbGk12MC1F93RjN0', 'usd', 79000.00, '63144146215ac', 'HAPPY_SHOPPING40937038', '04 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-04 00:10:15', NULL),
 (10, 1, 3, 5, 1, 'User', 'user1@gmail.com', '01700000000', 1111, 'User 1', 'card_1LiDGJD1QbGk12MCXMvvB0BK', 'Stripe', 'txn_3LiDGLD1QbGk12MC1sfoqUoJ', 'usd', 800.00, '6322df9ce0e26', 'HAPPY_SHOPPING12781364', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-15 02:17:36', NULL),
-(11, 1, 3, 5, 1, 'Tafshir', 'user1@gmail.com', '01700000000', 2222, 'Tafshir 1', 'card_1LiDKKD1QbGk12MCYuSNkSHd', 'Stripe', 'txn_3LiDKLD1QbGk12MC0sCP9Ulr', 'usd', 79000.00, '6322e09556e5a', 'HAPPY_SHOPPING80511000', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-15 02:21:43', NULL),
-(12, 1, 3, 5, 1, 'User', 'user1@gmail.com', '01700000000', 11111, 'AAAAAA', 'Casn-on', 'Cash-on', NULL, 'TK', 79000.00, NULL, 'HAPPY_SHOPPING21794507', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-15 03:50:20', NULL);
+(11, 1, 3, 5, 1, 'Tafshir', 'user1@gmail.com', '01700000000', 2222, 'Tafshir 1', 'card_1LiDKKD1QbGk12MCYuSNkSHd', 'Stripe', 'txn_3LiDKLD1QbGk12MC0sCP9Ulr', 'usd', 79000.00, '6322e09556e5a', 'HAPPY_SHOPPING80511000', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2022-09-15 02:21:43', '2022-09-18 01:10:38'),
+(12, 1, 3, 5, 1, 'User', 'user1@gmail.com', '01700000000', 11111, 'AAAAAA', 'Casn-on', 'Cash-on', NULL, 'TK', 79000.00, NULL, 'HAPPY_SHOPPING21794507', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Delivered', '2022-09-15 03:50:20', '2022-09-18 00:49:23');
 
 -- --------------------------------------------------------
 
@@ -449,7 +449,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('gSGjmnVKrBfr7keOgLlZlX8lqbMiRFSPMLzRItgx', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiOEk3aXRpcUMySHpZb1hUcWlwcGxBcVpuVjlaR3VNN2w2dFc5eUx0byI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyL2Rvd25sb2FkX2ludm9pY2UvMTAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxOToicGFzc3dvcmRfaGFzaF9hZG1pbiI7czo2MDoiJDJ5JDEwJEhicUI4Y2hYUnRwQzVIN2k0WHpXWGV0RXBEMjE2Y3hrMTA2M0FjQUJnVzhuOW1BRWtPLzJLIjtzOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJC5CTnRrSmZEM3JSckY0OTJ0WGR6bWVZVWpUSkdkOFM2M2tJeDJWbVNqdHZkSUdOVjVYTkxhIjt9', 1663322591);
+('qNz9vpd9w9ZoouhedTWgxHvAygFBFi1T448ZGNm5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiYlFtdXBXbFhmUDlINDlubDBhTGI3eURyemhSdFVybkNkZGFHU2lJaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi1vcmRlcnMvaW52b2ljZS9kb3dubG9hZC8xMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE5OiJwYXNzd29yZF9oYXNoX2FkbWluIjtzOjYwOiIkMnkkMTAkSGJxQjhjaFhSdHBDNUg3aTRYeldYZXRFcEQyMTZjeGsxMDYzQWNBQmdXOG45bUFFa08vMksiO30=', 1663485753);
 
 -- --------------------------------------------------------
 

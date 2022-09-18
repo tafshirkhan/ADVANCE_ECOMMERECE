@@ -452,6 +452,27 @@ Route::prefix('admin-orders')->group(function(){
     //Cancel orders
     Route::get('/cancel/orders',[OrderController::class,'CancelOrders'])->name('cancel.orders');
 
+    //Pending order To Confirm Orders
+    Route::get('/pendingTo/confirmOrders/{order_id}',[OrderController::class,'PendingToConfirmOrders'])->name('pendingTo.confirmOrders');
+
+    //Confirm Orders To Processing Orders
+    Route::get('/confirmTo/processingOrders/{order_id}',[OrderController::class,'ConfirmOrdersToProcess'])->name('confirmTo.processingOrders');
+
+    //Processing Orders to Picked order
+    Route::get('/processingOrderTo/pickedOrders/{order_id}',[OrderController::class,'ProcessingOrderToPickedOrders'])->name('processingOrderTo.pickedOrders');
+
+    //Picked order to Shipped order
+    Route::get('/pickedOrdersTo/shippedOrders/{order_id}',[OrderController::class,'PickedOrdersToShippedOrders'])->name('pickedOrdersTo.shippedOrders');
+   
+    //Shipped order to Delivered order
+    Route::get('/shippedOrdersTo/deliveredOrders/{order_id}',[OrderController::class,'ShippedOrdersToDeliveredOrders'])->name('shippedOrdersTo.deliveredOrders');
+
+     //Cancel order
+    Route::get('/pendingTo/cancelOrders/{order_id}',[OrderController::class,'PendingToCancelOrders'])->name('pendingTo.cancelOrders');
+
+    //Download Admin Invoice
+    Route::get('/invoice/download/{order_id}',[OrderController::class,'AdminInvoiceDownload'])->name('invoice.download');
+
 });
 
 

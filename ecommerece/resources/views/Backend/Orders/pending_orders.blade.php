@@ -38,14 +38,13 @@
                                             <td>{{ $items->invoice_no }}</td>
                                             <td>{{ $items->amount }}</td>
                                             <td>{{ $items->payment_method }}</td>
-                                            <td> <span class="badge badge-pill badge-success">{{ $items->status }}</span>
+                                            <td> <span class="badge badge-pill badge-warning">{{ $items->status }}</span>
                                             </td>
 
                                             <td>
                                                 <a href="{{ route('pendingorder.details', $items->id) }}"
                                                     class="btn btn-info"><i class="fa fa-eye"></i></a>
-                                                <a href="" class="btn btn-danger" id="delete"><i
-                                                        class="fa fa-trash"></i></a>
+
 
 
                                             </td>

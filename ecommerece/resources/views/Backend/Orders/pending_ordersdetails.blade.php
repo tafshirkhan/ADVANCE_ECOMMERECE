@@ -87,8 +87,32 @@
                             </tr>
                             <tr>
                                 <th>Order:</th>
-                                <th><span class="badge badge-pill badge-warning"
-                                        style="background: rgb(219, 9, 6)">{{ $order->status }}</span></th>
+                                <th><span class="badge badge-pill badge-info">{{ $order->status }}</span></th>
+                            </tr>
+
+                            <tr>
+                                {{-- Admin order status update --}}
+                                <th></th>
+                                <th>
+                                    @if ($order->status == 'Pending')
+                                        <a href="{{ route('pendingTo.confirmOrders', $order->id) }}"
+                                            class="btn btn-block btn-primary" id="confirm">Confirm Order</a>
+                                        <a href="{{ route('pendingTo.cancelOrders', $order->id) }}"
+                                            class="btn btn-block btn-danger" id="cancel">Cancel Order</a>
+                                    @elseif ($order->status == 'Confirm')
+                                        <a href="{{ route('confirmTo.processingOrders', $order->id) }}"
+                                            class="btn btn-block btn-primary" id="processing">Processing Order</a>
+                                    @elseif ($order->status == 'Processing')
+                                        <a href="{{ route('processingOrderTo.pickedOrders', $order->id) }}"
+                                            class="btn btn-block btn-primary" id="picked">Picked Order</a>
+                                    @elseif ($order->status == 'Picked')
+                                        <a href="{{ route('pickedOrdersTo.shippedOrders', $order->id) }}"
+                                            class="btn btn-block btn-primary" id="shipped">Shipped Order</a>
+                                    @elseif ($order->status == 'Shipped')
+                                        <a href="{{ route('shippedOrdersTo.deliveredOrders', $order->id) }}"
+                                            class="btn btn-block btn-primary" id="delivered">Deliver Order</a>
+                                    @endif
+                                </th>
                             </tr>
 
                         </table>

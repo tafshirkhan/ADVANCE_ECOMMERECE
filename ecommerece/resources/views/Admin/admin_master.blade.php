@@ -89,7 +89,10 @@
     {{-- sweet alert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.min.js"></script>
-    <script type="text/javascript">
+
+    <script src="{{ asset('backend/js/sweet_alert_code.js') }}"></script>
+
+    {{-- <script type="text/javascript">
         $(function() {
             $(document).on('click', '#delete', function(e) {
                 e.preventDefault();
@@ -115,7 +118,7 @@
                 })
             });
         });
-    </script>
+    </script> --}}
 
 
 
