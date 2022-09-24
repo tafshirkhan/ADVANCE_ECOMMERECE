@@ -290,6 +290,15 @@ function(){
     
     //Download Invoice
     Route::get('/download_invoice/{order_id}',[AllUserController::class, 'DownloadInvoice']);
+    
+    //Return order
+    Route::post('/return/order/{order_id}', [AllUserController::class,'ReturnOrder'])->name('return.order');
+
+    //Return order list
+    Route::get('/return/order/list', [AllUserController::class,'ReturnOrderList'])->name('returnorder.list');
+
+    //Cancel order list
+    Route::get('/cancel/order/list', [AllUserController::class,'CancelOrderList'])->name('cancelorder.list');
 
 });
 

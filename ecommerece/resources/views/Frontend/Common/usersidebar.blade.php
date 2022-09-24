@@ -11,10 +11,12 @@ $user = App\Models\User::find($data);
 
     <ul class="list-group list-group-flush">
         <a href="" class="btn btn-primary btn-sm btn-block">Home</a>
-        <a href="{{ route('user.profile') }}" class="btn btn-info btn-sm btn-block">Profile</a>
-        <a href="{{ route('user.password') }}" class="btn btn-success btn-sm btn-block">Changes
+        <a href="{{ route('user.profile') }}" class="btn btn-success btn-sm btn-block">Profile</a>
+        <a href="{{ route('user.password') }}" class="btn btn-warning btn-sm btn-block">Changes
             Password</a>
         <a href="{{ route('order.placed') }}" class="btn btn-success btn-sm btn-block">Placed Order</a>
+        <a href="{{ route('returnorder.list') }}" class="btn btn-warning btn-sm btn-block">Return Order</a>
+        <a href="{{ route('cancelorder.list') }}" class="btn btn-warning btn-sm btn-block">Cancel Order</a>
         <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
 
 
