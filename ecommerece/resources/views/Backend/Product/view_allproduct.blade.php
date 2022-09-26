@@ -14,7 +14,8 @@
 
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">All Product List</h3>
+                        <h3 class="box-title">All Product List <span
+                                class="badge badge-pill badge-danger">{{ count($product) }}</span></h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -70,8 +71,8 @@
 
                                                 <a href="{{ route('product.edit', $product->id) }}"
                                                     class="btn btn-info">Edit</a>
-                                                <a href="{{ route('product.delete', $product->id) }}"
-                                                    class="btn btn-danger" id="delete">Delete</a>
+                                                <a href="{{ route('product.delete', $product->id) }}" class="btn btn-danger"
+                                                    id="delete">Delete</a>
 
                                                 @if ($product->status == 1)
                                                     <a href="{{ route('product.inactive', $product->id) }}"

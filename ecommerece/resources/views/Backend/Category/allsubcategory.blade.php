@@ -14,7 +14,8 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">All Sub Category</h3>
+                            <h3 class="box-title">All Sub Category <span
+                                    class="badge badge-pill badge-danger">{{ count($subcategory) }}</span></h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">

@@ -22,8 +22,8 @@ use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\CashonController;
 use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\Backend\OrderController;
-
-
+use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\VerifiedUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -483,6 +483,30 @@ Route::prefix('admin-orders')->group(function(){
     Route::get('/invoice/download/{order_id}',[OrderController::class,'AdminInvoiceDownload'])->name('invoice.download');
 
 });
+
+
+//Admin Order Reports
+Route::prefix('orderreports')->group(function(){
+    Route::get('/allorder/view/reports', [ReportController::class, 'AllOrderReportsView'])->name('allorder.reports');
+
+    //Search By Date
+    Route::post('/searchby/date', [ReportController::class, 'SearchByDate'])->name('searchby.date');
+
+    //Search By Month
+    Route::post('/searchby/month', [ReportController::class, 'SearchByMonth'])->name('searchby.month');
+
+     //Search By Year
+    Route::post('/searchby/year', [ReportController::class, 'SearchByYear'])->name('searchby.year');
+
+});
+
+
+//All Verified Users 
+Route::prefix('verifiedusers')->group(function(){
+    Route::get('/allverified/users', [VerifiedUserController::class, 'AllVerifiedUsers'])->name('allverified.users');
+
+});
+
 
 
 //admin guard

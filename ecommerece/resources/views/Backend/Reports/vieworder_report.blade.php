@@ -14,8 +14,7 @@
 
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">All Brands <span
-                                class="badge badge-pill badge-danger">{{ count($brands) }}</span></h3>
+                        <h3 class="box-title">Order List</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -23,25 +22,30 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Brand Name</th>
-                                        <th>Image</th>
+                                        <th>Date</th>
+                                        <th>Invoice</th>
+                                        <th>Amount</th>
+                                        <th>Payment</th>
+                                        <th>Status</th>
                                         <th>Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($brands as $brand)
+                                    @foreach ($orders as $items)
                                         <tr>
-                                            <td>{{ $brand->brand_name }}</td>
-                                            <td>
-                                                <img src="{{ asset($brand->brand_image) }}"
-                                                    style="width: 60px; height:60px;">
+                                            <td>{{ $items->order_date }}</td>
+                                            <td>{{ $items->invoice_no }}</td>
+                                            <td>{{ $items->amount }}</td>
+                                            <td>{{ $items->payment_method }}</td>
+                                            <td> <span class="badge badge-pill badge-success">{{ $items->status }}</span>
                                             </td>
+
                                             <td>
-                                                <a href="{{ route('brand.edit', $brand->id) }}"
-                                                    class="btn btn-info">Edit</a>
-                                                <a href="{{ route('brand.delete', $brand->id) }}" class="btn btn-danger"
-                                                    id="delete">Delete</a>
+                                                <a href="{{ route('pendingorder.details', $items->id) }}"
+                                                    class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('invoice.download', $items->id) }}"
+                                                    class="btn btn-danger"><i class="fa fa-download"></i></a>
 
 
                                             </td>

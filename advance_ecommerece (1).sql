@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 18, 2022 at 09:23 AM
+-- Generation Time: Sep 26, 2022 at 09:29 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -317,7 +317,7 @@ INSERT INTO `orders` (`id`, `user_id`, `division_id`, `district_id`, `state_id`,
 (9, 3, 3, 5, 1, 'Ahmed', 'ahmed100@gmail.cpm', '01234567892', 1111, 'Ahmed', 'card_1LeC25D1QbGk12MCeOffnlQS', 'Stripe', 'txn_3LeC26D1QbGk12MC1F93RjN0', 'usd', 79000.00, '63144146215ac', 'HAPPY_SHOPPING40937038', '04 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-04 00:10:15', NULL),
 (10, 1, 3, 5, 1, 'User', 'user1@gmail.com', '01700000000', 1111, 'User 1', 'card_1LiDGJD1QbGk12MCXMvvB0BK', 'Stripe', 'txn_3LiDGLD1QbGk12MC1sfoqUoJ', 'usd', 800.00, '6322df9ce0e26', 'HAPPY_SHOPPING12781364', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2022-09-15 02:17:36', NULL),
 (11, 1, 3, 5, 1, 'Tafshir', 'user1@gmail.com', '01700000000', 2222, 'Tafshir 1', 'card_1LiDKKD1QbGk12MCYuSNkSHd', 'Stripe', 'txn_3LiDKLD1QbGk12MC0sCP9Ulr', 'usd', 79000.00, '6322e09556e5a', 'HAPPY_SHOPPING80511000', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2022-09-15 02:21:43', '2022-09-18 01:10:38'),
-(12, 1, 3, 5, 1, 'User', 'user1@gmail.com', '01700000000', 11111, 'AAAAAA', 'Casn-on', 'Cash-on', NULL, 'TK', 79000.00, NULL, 'HAPPY_SHOPPING21794507', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Delivered', '2022-09-15 03:50:20', '2022-09-18 00:49:23');
+(12, 1, 3, 5, 1, 'User', 'user1@gmail.com', '01700000000', 11111, 'AAAAAA', 'Casn-on', 'Cash-on', NULL, 'TK', 79000.00, NULL, 'HAPPY_SHOPPING21794507', '15 September 2022', 'September 2022', '2022', NULL, NULL, NULL, NULL, NULL, NULL, '24 September 2022', 'Major defect on the product', 'Delivered', '2022-09-15 03:50:20', '2022-09-24 02:34:03');
 
 -- --------------------------------------------------------
 
@@ -449,7 +449,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('qNz9vpd9w9ZoouhedTWgxHvAygFBFi1T448ZGNm5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiYlFtdXBXbFhmUDlINDlubDBhTGI3eURyemhSdFVybkNkZGFHU2lJaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi1vcmRlcnMvaW52b2ljZS9kb3dubG9hZC8xMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE5OiJwYXNzd29yZF9oYXNoX2FkbWluIjtzOjYwOiIkMnkkMTAkSGJxQjhjaFhSdHBDNUg3aTRYeldYZXRFcEQyMTZjeGsxMDYzQWNBQmdXOG45bUFFa08vMksiO30=', 1663485753);
+('6iEUUGUoXxUGCaJsUQ3gwz9vsm3XZRajR6T8AUZY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUGVFMDhGM3FMR2Z4T1BsV282YnpBeHppWVE5dkpJWDR1Tzl0SXFaVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jdXBvbi9hbGwvY291cG9ucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE5OiJwYXNzd29yZF9oYXNoX2FkbWluIjtzOjYwOiIkMnkkMTAkSGJxQjhjaFhSdHBDNUg3aTRYeldYZXRFcEQyMTZjeGsxMDYzQWNBQmdXOG45bUFFa08vMksiO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHkwaHBIUUpTQnBwRDQwQ05NU3ZYMy52eElJRHl3RXlINjZ4d243aWxJYnNYL3pvVy5wbXM2Ijt9', 1664177307);
 
 -- --------------------------------------------------------
 
@@ -691,6 +691,7 @@ CREATE TABLE `users` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_seen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `two_factor_secret` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -707,10 +708,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'User', 'user1@gmail.com', '01700000000', NULL, '$2y$10$.BNtkJfD3rRrF492tXdzmeYUjTJGd8S63kIx2VmSjtvdIGNV5XNLa', NULL, NULL, NULL, NULL, NULL, '202206091703images (1).jpg', '2022-06-01 12:15:45', '2022-06-09 11:03:37'),
-(2, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', NULL, '$2y$10$y0hpHQJSBppD40CNMSvX3.vxIIDywEyH66xwn7ilIbsX/zoW.pms6', NULL, NULL, NULL, 'dTRVHEqulgxZAzWIhoq3MatN0uHyBySDR04gn3kRwRRIibvigwM7KpCN7kiL', NULL, '202206071800images (1).jpg', '2022-06-06 12:48:01', '2022-06-07 12:03:56'),
-(3, 'Ahmed', 'ahmed100@gmail.cpm', '01234567892', NULL, '$2y$10$dNzFMqp5O7GDo3mFUk5a/uPEakRQSG7r8bZSOTkWsE6BqaISt5CH6', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-04 00:09:10', '2022-09-04 00:09:10');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `last_seen`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
+(1, 'User', 'user1@gmail.com', '01700000000', NULL, NULL, '$2y$10$.BNtkJfD3rRrF492tXdzmeYUjTJGd8S63kIx2VmSjtvdIGNV5XNLa', NULL, NULL, NULL, NULL, NULL, '202206091703images (1).jpg', '2022-06-01 12:15:45', '2022-06-09 11:03:37'),
+(2, 'Leonardo DiCaprio', 'user2@gmail.com', '01700000000', '2022-09-26 07:12:44', NULL, '$2y$10$y0hpHQJSBppD40CNMSvX3.vxIIDywEyH66xwn7ilIbsX/zoW.pms6', NULL, NULL, NULL, '6hWjTjLaenlvqDHCEQfwTymcxjkvCePymBCbIAEnqR3Ql4PKtL6vsvWfFcNp', NULL, '202206071800images (1).jpg', '2022-06-06 12:48:01', '2022-09-26 01:12:44'),
+(3, 'Ahmed', 'ahmed100@gmail.cpm', '01234567892', NULL, NULL, '$2y$10$dNzFMqp5O7GDo3mFUk5a/uPEakRQSG7r8bZSOTkWsE6BqaISt5CH6', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-04 00:09:10', '2022-09-04 00:09:10');
 
 -- --------------------------------------------------------
 

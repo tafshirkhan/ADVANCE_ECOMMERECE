@@ -200,6 +200,34 @@ $route = Route::current()->getName();
 
                 </ul>
             </li>
+
+            <li class="treeview {{ $prefix == '/orderreports' ? 'active' : '' }}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Order Reports</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'allorder.reports' ? 'active' : '' }}"><a
+                            href="{{ route('allorder.reports') }}"><i class="ti-more"></i>All Order Reports</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview {{ $prefix == '/verifiedusers' ? 'active' : '' }}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Verified Users</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'allverified.users' ? 'active' : '' }}"><a
+                            href="{{ route('allverified.users') }}"><i class="ti-more"></i>Users</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
 
