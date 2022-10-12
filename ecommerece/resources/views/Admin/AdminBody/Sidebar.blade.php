@@ -228,6 +228,29 @@ $route = Route::current()->getName();
                             href="{{ route('allverified.users') }}"><i class="ti-more"></i>Users</a></li>
                 </ul>
             </li>
+
+
+            <li class="treeview {{ $prefix == '/blogs' ? 'active' : '' }}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Blogs</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'blog.category' ? 'active' : '' }}"><a
+                            href="{{ route('blog.category') }}"><i class="ti-more"></i>Blog Category</a></li>
+                    <li class="{{ $route == 'addblog.category' ? 'active' : '' }}"><a
+                            href="{{ route('addblog.category') }}"><i class="ti-more"></i>Add Category</a></li>
+                    <li class="{{ $route == 'viewall.post' ? 'active' : '' }}"><a
+                            href="{{ route('viewall.post') }}"><i class="ti-more"></i>View All Post</a></li>
+                    <li class="{{ $route == 'add.post' ? 'active' : '' }}"><a href="{{ route('add.post') }}"><i
+                                class="ti-more"></i>Add Post</a></li>
+                </ul>
+            </li>
+
+
         </ul>
     </section>
 

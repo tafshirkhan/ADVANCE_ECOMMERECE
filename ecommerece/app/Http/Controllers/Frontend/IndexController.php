@@ -11,6 +11,8 @@ use App\Models\Slider;
 use App\Models\Product;
 use App\Models\MultiImage;
 use App\Models\Brand;
+use App\Models\Blog\BlogPost;
+use App\Models\Blog\CategoryBlog;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
@@ -36,9 +38,11 @@ class IndexController extends Controller
         $skipbrand_1 = Brand::skip(3)->first();
         $skip_brandproduct_1 = Product::where('status',1)->where('category_id',$skipbrand_1->id)->orderBy('id','DESC')->get();
 
+        $blogpost = BlogPost::latest()->get();
 
 
-        return view('Frontend.index',compact('category','slider','product','featured','hotdeals','specialoffer','specialdeals','skipcategory','skipproduct','skipcategory_1','skipproduct_1','skipbrand_1','skip_brandproduct_1'));
+
+        return view('Frontend.index',compact('category','slider','product','featured','hotdeals','specialoffer','specialdeals','skipcategory','skipproduct','skipcategory_1','skipproduct_1','skipbrand_1','skip_brandproduct_1','blogpost'));
     }
 
     public function UserLogout(){

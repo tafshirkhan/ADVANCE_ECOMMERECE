@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2022 at 09:29 AM
+-- Generation Time: Oct 12, 2022 at 08:04 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -105,6 +105,31 @@ INSERT INTO `area_of_shippings` (`id`, `division_name`, `created_at`, `updated_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blog_posts`
+--
+
+CREATE TABLE `blog_posts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `post_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_title_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_details` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blog_posts`
+--
+
+INSERT INTO `blog_posts` (`id`, `category_id`, `post_title`, `post_title_slug`, `post_image`, `post_details`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Expensive look & a budget', 'expensive look & a budget', 'upload/blogpost/1746389958370356.png', '<p style=\"text-align:justify\">Give tips to your readers on how to get the most out of their money so that they can look good without breaking the bank. Be sure to also mention the drawbacks that can occur when choosing to buy clothes from unreputable sources when looking for something cheap.</p>', '2022-10-11 05:20:50', NULL),
+(2, 1, 'Artificial Intelligence Blog Post', 'artificial intelligence blog post', 'upload/blogpost/1746458349847043.jpg', '<p style=\"text-align:justify\">It reports breaking news on comprehensive content about prime tech businesses along with incisive coverage of the gaming industry. The blog comprises a series of tech-related articles, newsletters, general news, and businesses</p>', '2022-10-11 23:27:53', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `brands`
 --
 
@@ -153,6 +178,28 @@ INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `category_icon
 (7, 'Home', 'home', 'fa fa-diamond', NULL, '2022-07-07 13:08:57'),
 (8, 'Appliances', 'appliances', 'fa fa-paper-plane', NULL, '2022-07-07 13:09:54'),
 (9, 'Grocery', 'grocery', 'fa fa-envira', NULL, '2022-07-08 12:36:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category_blogs`
+--
+
+CREATE TABLE `category_blogs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `blog_category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `blog_category_slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `category_blogs`
+--
+
+INSERT INTO `category_blogs` (`id`, `blog_category`, `blog_category_slug`, `created_at`, `updated_at`) VALUES
+(1, 'Technology Blog', 'technology blog', '2022-10-02 00:13:14', '2022-10-02 00:13:14'),
+(2, 'Fashion Blog', 'fashion blog', '2022-10-02 00:13:26', '2022-10-02 00:13:26');
 
 -- --------------------------------------------------------
 
@@ -232,7 +279,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2022_08_16_043723_create_shipping_states_table', 14),
 (21, '2022_08_21_080041_create_shippings_table', 15),
 (22, '2022_08_24_102704_create_orders_table', 16),
-(23, '2022_08_24_102811_create_order_items_table', 16);
+(23, '2022_08_24_102811_create_order_items_table', 16),
+(24, '2022_10_02_053719_create_category_blogs_table', 17),
+(25, '2022_10_11_084043_create_blog_posts_table', 18);
 
 -- --------------------------------------------------------
 
@@ -449,7 +498,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('6iEUUGUoXxUGCaJsUQ3gwz9vsm3XZRajR6T8AUZY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUGVFMDhGM3FMR2Z4T1BsV282YnpBeHppWVE5dkpJWDR1Tzl0SXFaVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jdXBvbi9hbGwvY291cG9ucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE5OiJwYXNzd29yZF9oYXNoX2FkbWluIjtzOjYwOiIkMnkkMTAkSGJxQjhjaFhSdHBDNUg3aTRYeldYZXRFcEQyMTZjeGsxMDYzQWNBQmdXOG45bUFFa08vMksiO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHkwaHBIUUpTQnBwRDQwQ05NU3ZYMy52eElJRHl3RXlINjZ4d243aWxJYnNYL3pvVy5wbXM2Ijt9', 1664177307);
+('PXYlgiX6CCOaQoVpDSX8f5f3JtPABq9TRjyTck96', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoibmRVbEFlRzFubUtIbGFjWG9RUTFBY2JYYjRBbndZWEgzZjVoNjFvMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE5OiJwYXNzd29yZF9oYXNoX2FkbWluIjtzOjYwOiIkMnkkMTAkSGJxQjhjaFhSdHBDNUg3aTRYeldYZXRFcEQyMTZjeGsxMDYzQWNBQmdXOG45bUFFa08vMksiO30=', 1665554648);
 
 -- --------------------------------------------------------
 
@@ -751,6 +800,12 @@ ALTER TABLE `area_of_shippings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `blog_posts`
+--
+ALTER TABLE `blog_posts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
@@ -760,6 +815,12 @@ ALTER TABLE `brands`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `category_blogs`
+--
+ALTER TABLE `category_blogs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -888,6 +949,12 @@ ALTER TABLE `area_of_shippings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `blog_posts`
+--
+ALTER TABLE `blog_posts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
@@ -898,6 +965,12 @@ ALTER TABLE `brands`
 --
 ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `category_blogs`
+--
+ALTER TABLE `category_blogs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cupons`
@@ -915,7 +988,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `multi_images`

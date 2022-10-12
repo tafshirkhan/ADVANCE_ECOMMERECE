@@ -19,7 +19,8 @@ class CategoryController extends Controller
     }
 
     public function StoreCategory(Request $req){
-         $req->validate([
+        
+        $req->validate([
             'category_name'=>'required|min:4',
             'category_icon'=>'required',
         ],[

@@ -24,7 +24,8 @@ use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\VerifiedUserController;
-
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Frontend\HomeBlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -507,6 +508,35 @@ Route::prefix('verifiedusers')->group(function(){
 
 });
 
+
+//Blog Section
+Route::prefix('blogs')->group(function(){
+    Route::get('/category', [BlogController::class, 'BlogCategory'])->name('blog.category');
+    Route::get('/add/blogcategory', [BlogController::class, 'AddBlogCategory'])->name('addblog.category');
+    Route::post('/blog/category/store', [BlogController::class, 'StoreBlogCategory'])->name('blogcategory.store');
+    Route::get('/edit/blogcategory/{id}', [BlogController::class, 'EditBlogCategory'])->name('blogcategory.edit');
+    Route::post('/blogcategory/update', [BlogController::class, 'UpdateBlogCategory'])->name('blogcategory.update'); 
+    
+    //ADMIN BLOG POST
+    Route::get('/viewall/post', [BlogController::class, 'ViewAllBlogPost'])->name('viewall.post');
+    Route::get('/add/post', [BlogController::class, 'AddBlogPost'])->name('add.post');
+    Route::post('/store/blogpost', [BlogController::class, 'StoreBlogPost'])->name('store.blogpost'); 
+    Route::get('/edit/blogpost/{id}', [BlogController::class, 'EditBlogPost'])->name('blogpost.edit');  
+    Route::get('/delete/blogpost/{id}', [BlogController::class, 'DeleteBlogPost'])->name('blogpost.delete');  
+
+
+
+
+
+
+});
+
+//FRONTEND BLOG SHOWING
+Route::get('/blog', [HomeBlogController::class, 'BlogView'])->name('blog');
+//POST blog details
+Route::get('/postblog/detailsinfo/{id}', [HomeBlogController::class, 'PostBlogDetailsInfo'])->name('postblog.detailsinfo');
+//FOR CATEGORISE BLOG
+Route::get('/blog/category/post/{category_id}', [HomeBlogController::class, 'CategorywiseAllBlog']);
 
 
 //admin guard
